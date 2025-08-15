@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b9dc1ee8528132e48a0fbba180bbb8b7
+guid: bcaf09319a00d6b4396179bbf2acf27e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7742569235892824772
-    second: Base_Flood_Meter_Empty_0
+      213: -2016122319021994169
+    second: Starting_Screen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Base_Flood_Meter_Empty_0
+      name: Starting_Screen_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 43
+        width: 224
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ca624ab2b1237b60800000000000000
-      internalID: 7742569235892824772
+      spriteID: 74f05f6ce6b4504e0800000000000000
+      internalID: -2016122319021994169
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Base_Flood_Meter_Empty_0: 7742569235892824772
+      Starting_Screen_0: -2016122319021994169
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
