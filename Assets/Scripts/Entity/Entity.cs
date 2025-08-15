@@ -220,7 +220,7 @@ public abstract class Entity : MonoBehaviour
 
             if(hitGameObject.CompareTag("Enemy") || hitGameObject.CompareTag("Player")) {
                 Entity entity = hitGameObject.GetComponent<Entity>();
-                entity.TakeDamage(this._damage);
+                if(!entity.isDead) entity.TakeDamage(this._damage);
                 this.DisableAttack();
             } 
         }
@@ -230,7 +230,7 @@ public abstract class Entity : MonoBehaviour
         this._health -= dmg;
         this.isHit = true;
 
-        if(this._health <= 0) {
+        if(this.isDead) {
             this.OnDeath();
         } else {
             this.ChangeAnimationFlag(this._hitAnimationFlag, true);

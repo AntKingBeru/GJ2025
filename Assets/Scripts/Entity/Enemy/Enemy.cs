@@ -69,9 +69,4 @@ public class Enemy : Entity
         Instantiate(_deadMePrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
-
-    void OnTriggerEnter2D()
-    {
-        
-    }
 }
