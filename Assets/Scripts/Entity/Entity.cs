@@ -21,9 +21,16 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
 
     protected bool isAttacking = false;
-    protected bool isDead = false;
     protected float castDistance = 1f; // How far the box is cast
     protected bool isHit = false;
+    public bool isDead
+    {
+        get => this._health <= 0;
+    }
+    
+    public float currentHealthPercent {
+        get => (float)this._health / (float)this._maxHealth;
+    }
 
     // Prefab with the dead pipe
     // On player move on pickup
@@ -224,7 +231,6 @@ public abstract class Entity : MonoBehaviour
         this.isHit = true;
 
         if(this._health <= 0) {
-            this.isDead = true;
             this.OnDeath();
         } else {
             this.ChangeAnimationFlag(this._hitAnimationFlag, true);
@@ -241,10 +247,6 @@ public abstract class Entity : MonoBehaviour
         if(flagName != "default") {
             this._animator.SetBool(flagName, flag);
         }
-    }
-
-    public float CurrentHealthPercent() {
-        return (float)this._health / (float)this._maxHealth;
     }
 
     protected abstract void OnDeath();
