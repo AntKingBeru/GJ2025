@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &597032221
+--- !u!1 &936035431
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,41 +127,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 597032223}
-  - component: {fileID: 597032222}
+  - component: {fileID: 936035433}
+  - component: {fileID: 936035432}
   m_Layer: 0
-  m_Name: SpawnManager
+  m_Name: Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &597032222
+--- !u!114 &936035432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597032221}
+  m_GameObject: {fileID: 936035431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d13f9dd9451f465d81377b1643a09a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f90f7617c1124a44bded650d5b90d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRate: 0.5
-  _xCount: 12
-  _yCount: 7
-  _spawnerPrefab: {fileID: 6613102225564011767, guid: 68ec51e4f11ab42938700adecf1200ac, type: 3}
---- !u!4 &597032223
+  _maxSpawnsAllowed: 40
+  _spawnManagerPrefab: {fileID: 7635632918404583939, guid: 7cb63e43c85ee4a5daf3bbaf1d894085, type: 3}
+--- !u!4 &936035433
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597032221}
+  m_GameObject: {fileID: 936035431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.99244887, y: -0.49992588, z: -0.032391526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -309,4 +307,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1661057531}
-  - {fileID: 597032223}
+  - {fileID: 936035433}

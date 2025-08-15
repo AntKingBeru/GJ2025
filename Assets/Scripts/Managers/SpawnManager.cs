@@ -79,6 +79,14 @@ public class SpawnManager : MonoBehaviour
                 scriptReference.Open();
             }
         }
+    }
 
+    public int OpenPipesCount()
+    {
+        return _spawnPoints.FindAll((spawner) =>
+        {
+            SpawnPoint scriptReference = spawner.GetComponent<SpawnPoint>();
+            return scriptReference.IsOpen;
+        }).Count;
     }
 }
