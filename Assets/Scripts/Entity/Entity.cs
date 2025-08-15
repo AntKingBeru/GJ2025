@@ -208,16 +208,16 @@ public abstract class Entity : MonoBehaviour
                 direction = transform.right;
                 break;
         }
-        // RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, castDistance, this.layerMask);
-        //  if (hit.collider != null) {
-        //     // Getting game object
-        //     GameObject hitGameObject = hit.collider.gameObject;
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, castDistance, this._layerMask);
+         if (hit.collider != null) {
+            // Getting game object
+            GameObject hitGameObject = hit.collider.gameObject;
 
-        //     if(hitGameObject.CompareTag("Enemy") || hitGameObject.CompareTag("Player")) {
-        //         Entity entity = hitGameObject.GetComponent<Entity>();
-        //         entity.TakeDamage(this.damage);
-        //     } 
-        //  }
+            if(hitGameObject.CompareTag("Enemy") || hitGameObject.CompareTag("Player")) {
+                Entity entity = hitGameObject.GetComponent<Entity>();
+                entity.TakeDamage(this._damage);
+            } 
+         }
     }
 
     public void TakeDamage(int dmg) {
