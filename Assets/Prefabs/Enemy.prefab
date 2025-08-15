@@ -103,9 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  _health: 100
   _damage: 10
-  _maxHealth: 100
+  _maxHealth: 90
   _horizontalAnimationFlag: Walk
   _upAnimationFlag: Walk
   _downAnimationFlag: Walk
