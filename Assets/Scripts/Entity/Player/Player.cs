@@ -8,30 +8,7 @@ public class Player : Entity
     private bool _isFixing;
         
     private GameObject _carriedObject;
-    
-    //     if (carriedObject == null)
-    // {
-    //     // Logic to detect and pick up an object (e.g., using OnTriggerStay2D and checking tags)
-    //     // For simplicity, let's assume 'objectToPickUp' is already determined
-    //     GameObject objectToPickUp = FindObjectOfType<PickableObject>().gameObject; // Example
-    //     if (objectToPickUp != null)
-    //     {
-    //         carriedObject = objectToPickUp;
-    //         carriedObject.transform.SetParent(holdPoint);
-    //         carriedObject.transform.localPosition = Vector3.zero; // Adjust as needed
-    //         // If it has a Rigidbody2D, disable physics
-    //         Rigidbody2D rb = carriedObject.GetComponent<Rigidbody2D>();
-    //         if (rb != null) rb.isKinematic = true;
-    //     }
-    // }
-    // else
-    // {
-    //     // Drop the object
-    //     Rigidbody2D rb = carriedObject.GetComponent<Rigidbody2D>();
-    //     if (rb != null) rb.isKinematic = false;
-    //     carriedObject.transform.SetParent(null);
-    //     carriedObject = null;
-    // }
+    private GameObject _currentFix;
 
 
     // Update is called once per frame
@@ -71,19 +48,12 @@ public class Player : Entity
         }
         else if (other.CompareTag("SpawnPoint"))
         {
-            DropPipe(other.gameObject);
+            Debug.Log("Walked on pipe");
+            this._currentFix = other.gameObject;
+            this.ChangeAnimationFlag(this._fixAnimationFlag, true);
         }
     }
-
-    private void DropPipe(GameObject spawnPoint)
-    {
-        // Drop the object
-        Rigidbody2D rb = _carriedObject.GetComponent<Rigidbody2D>();
-        if (rb != null) rb.isKinematic = false;
-        _carriedObject.transform.SetParent(null);
-        _carriedObject = null;
-    }
-
+    
     private void PickupPipe(GameObject objectToPickUp)
     {
         if (_carriedObject == null)
@@ -94,12 +64,33 @@ public class Player : Entity
             {
                 _carriedObject = objectToPickUp;
                 _carriedObject.transform.SetParent(transform); // My position
-                _carriedObject.transform.localPosition = Vector3.zero; // Adjust as needed
+                _carriedObject.transform.localPosition = new Vector3(0f, 0.5f, 0f); // Adjust as needed
                 // If it has a Rigidbody2D, disable physics
                 Rigidbody2D rb = _carriedObject.GetComponent<Rigidbody2D>();
-                if (rb != null) rb.isKinematic = true;
+                if (rb != null) rb.bodyType = RigidbodyType2D.Kinematic;
             }
         }
+    }
+
+    private void DropPipe(GameObject spawnPoint)
+    {
+        // Drop the object
+        Rigidbody2D rb = _carriedObject.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.bodyType = RigidbodyType2D.Kinematic;
+        _carriedObject.transform.SetParent(null);
+    }
+
+    public void DisableFixAnimation()
+    {
+        this.ChangeAnimationFlag(this._fixAnimationFlag, false);
+        // TODO - Trigger flood change
+        if(_currentFix != null)
+        {
+            SpawnPoint sp = _currentFix.GetComponent<SpawnPoint>();
+            sp.Close();
+            Destroy(_carriedObject);
+            _carriedObject = null;
+        } 
     }
 
     protected override void OnDeath() {
