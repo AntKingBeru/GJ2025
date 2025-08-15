@@ -15,6 +15,12 @@ public class Enemy : Entity
     // Update is called once per frame
     void Update()
     {
+        if (Entity.pause)
+        {
+            this.ResetMoveAnimation();
+            return;
+        }
+        
         if(this.isHit) {
             this.ResetMoveAnimation();
             this.DisableAttack();
@@ -57,8 +63,8 @@ public class Enemy : Entity
 
     private void CheckAttack(){
         float distance = Vector3.Distance(transform.position, this._target.position);
-
-        if(distance < this.castDistance) {
+        
+        if(distance <= this.castDistance) { //Added because of body size
             if(!this._wasInRadius) this.Attack();
             this._wasInRadius = true;
         } else this._wasInRadius = false;

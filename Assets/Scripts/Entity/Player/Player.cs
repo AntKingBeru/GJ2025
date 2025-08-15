@@ -15,6 +15,12 @@ public class Player : Entity
     // Update is called once per frame
     void Update()
     {
+        if (Entity.pause)
+        {
+            this.ResetMoveAnimation();
+            return;
+        }
+        
         if (this._isFixing) return; // Skip iteration while fixing
         
         if(this.isHit) {
@@ -73,19 +79,23 @@ public class Player : Entity
         }
     }
 
-    private void DropPipe(GameObject spawnPoint)
+    private void DropPipe()
     {
-        // Drop the object
-        Rigidbody2D rb = _carriedObject.GetComponent<Rigidbody2D>();
-        if (rb != null) rb.bodyType = RigidbodyType2D.Kinematic;
-        _carriedObject.transform.SetParent(null);
+        if (_carriedObject != null)
+        {
+            // Drop the object
+            Rigidbody2D rb = _carriedObject.GetComponent<Rigidbody2D>();
+            if (rb != null) rb.bodyType = RigidbodyType2D.Kinematic;
+            _carriedObject.transform.SetParent(null);
+            _carriedObject = null;
+        }
+
     }
 
     public void DisableFixAnimation()
     {
         this.ChangeAnimationFlag(this._fixAnimationFlag, false);
         this._isFixing = false;
-        // TODO - Trigger flood change
         if(_currentFix != null)
         {
             SpawnPoint sp = _currentFix.GetComponent<SpawnPoint>();
@@ -98,17 +108,16 @@ public class Player : Entity
     public override void TakeDamage(int dmg)
     {
         base.TakeDamage(dmg);
-        Debug.Log("Got damage");
         // Disabling fix on take damage
         if (this._isFixing)
         {
             this.ChangeAnimationFlag(this._fixAnimationFlag, false);
             this._isFixing = false;
         }
+        DropPipe();
     }
 
     protected override void OnDeath() {
-        Debug.Log("Died!!");
         this.ChangeAnimationFlag(this._deathAnimationFlag, true);
     }
 }

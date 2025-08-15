@@ -30,10 +30,7 @@ public abstract class Entity : MonoBehaviour
         get => (float)this._health / (float)this._maxHealth;
     }
 
-    // Prefab with the dead pipe
-    // On player move on pickup
-    // Picked up on player, multi pipe
-    // When on hole, fix pipe
+    public static bool pause = false;
 
     protected enum Direction 
     {
@@ -49,7 +46,7 @@ public abstract class Entity : MonoBehaviour
     // For all animations
     protected Animator _animator;
 
-    void Awake()
+    void Start()
     {
         // Getting animator
         this._animator = GetComponent<Animator>();
