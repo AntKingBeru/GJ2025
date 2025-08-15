@@ -46,7 +46,7 @@ public abstract class Entity : MonoBehaviour
     // For all animations
     protected Animator _animator;
 
-    void Start()
+    void Awake()
     {
         // Getting animator
         this._animator = GetComponent<Animator>();

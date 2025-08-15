@@ -78,6 +78,9 @@ public class SpawnManager : MonoBehaviour
         //TODO make better loop
         while (true)
         {
+            if(Entity.pause) 
+                continue;
+            
             yield return new WaitForSeconds(_spawnRate);
             var closedSp = _spawnPoints.FindAll((spawner) =>
             {

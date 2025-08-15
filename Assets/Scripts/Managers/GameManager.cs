@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         _spawnManager = Instantiate(_spawnManagerPrefab);
         StartCoroutine(CalculateFlood());
         _player = FindFirstObjectByType<Player>();
+        Entity.pause = false; // Reset pause
         
         var children = gameObject.GetComponentsInChildren<Transform>();
         foreach (var child in children)
