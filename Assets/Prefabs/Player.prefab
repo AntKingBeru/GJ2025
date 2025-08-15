@@ -102,9 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df7879ba13f46847864315d78f33d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1
+  moveSpeed: 2
   _health: 100
-  _damage: 50
+  _damage: 25
+  _maxHealth: 100
   _horizontalAnimationFlag: HorizontalWalk
   _upAnimationFlag: Up
   _downAnimationFlag: Down
@@ -112,10 +113,11 @@ MonoBehaviour:
   _attackUpAnimationFlag: AttackingUp
   _attackDownAnimationFlag: AttackingDown
   _hitAnimationFlag: Hit
-  _attackSize: 1.5
+  attackSize: 2
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
+  _deathAnimationFlag: Death
 --- !u!95 &3492114534600934685
 Animator:
   serializedVersion: 7

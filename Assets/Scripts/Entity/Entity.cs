@@ -23,6 +23,7 @@ public abstract class Entity : MonoBehaviour
     protected bool isAttacking = false;
     protected bool isDead = false;
     protected float castDistance = 1f; // How far the box is cast
+    protected bool isHit = false;
 
     // Prefab with the dead pipe
     // On player move on pickup
@@ -89,10 +90,7 @@ public abstract class Entity : MonoBehaviour
         }
 
         // Normalize the vector to prevent faster diagonal movement
-        if (movement.magnitude > 1f)
-        {
-            movement.Normalize();
-        }
+        if (movement.magnitude > 1f) movement.Normalize();
 
         // Apply movement scaled by speed and time.deltaTime for frame-rate independence
         transform.Translate(movement * this.moveSpeed * Time.deltaTime);
@@ -110,7 +108,7 @@ public abstract class Entity : MonoBehaviour
         this.ChangeAnimationFlag(this._upAnimationFlag, false);
         this.ChangeAnimationFlag(this._downAnimationFlag, false);
         this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
-        this._spriteRenderer.flipX = false; // Flip orientation
+        this._spriteRenderer.flipX = false; // Regular orientation
     }
 
     protected void MoveLeftAnimation() {
@@ -216,12 +214,14 @@ public abstract class Entity : MonoBehaviour
             if(hitGameObject.CompareTag("Enemy") || hitGameObject.CompareTag("Player")) {
                 Entity entity = hitGameObject.GetComponent<Entity>();
                 entity.TakeDamage(this._damage);
+                this.DisableAttack();
             } 
         }
     }
 
     public void TakeDamage(int dmg) {
         this._health -= dmg;
+        this.isHit = true;
 
         if(this._health <= 0) {
             this.isDead = true;
@@ -233,6 +233,7 @@ public abstract class Entity : MonoBehaviour
 
     public void DisableHitAnimation() {
         this.ChangeAnimationFlag(this._hitAnimationFlag, false);
+        this.isHit = false;
     }
 
     // Changing animcation flag if not default
