@@ -3,13 +3,13 @@ using System.Collections;
 
 public abstract class Entity : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 1f;
+    [SerializeField] protected float moveSpeed = 1f;
 
     [SerializeField] private int _health = 100;
 
     [SerializeField] private int _damage = 10;
 
-    // [SerializeField] protected string idleAnimationFlag = "idle";
+    [SerializeField] private int _maxHealth = 100;
     [SerializeField] private string _horizontalAnimationFlag = "default";
     [SerializeField] private string _upAnimationFlag = "default";
     [SerializeField] private string _downAnimationFlag = "default";
@@ -17,19 +17,26 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private string _attackUpAnimationFlag = "default";
     [SerializeField] private string _attackDownAnimationFlag = "default";
     [SerializeField] private string _hitAnimationFlag = "default";
-    [SerializeField] private float _attackSize = 1.5f;
+    [SerializeField] protected float attackSize = 1.5f;
     [SerializeField] private LayerMask _layerMask;
 
-    private bool _isAttacking = false;
+    protected bool isAttacking = false;
+    protected bool isDead = false;
+    protected float castDistance = 1f; // How far the box is cast
 
-    enum Direction 
+    // Prefab with the dead pipe
+    // On player move on pickup
+    // Picked up on player, multi pipe
+    // When on hole, fix pipe
+
+    protected enum Direction 
     {
         Right,
         Left,
         Up,
         Down
     }
-    private Direction _lastMoveDirection = Direction.Right;
+    protected Direction lastMoveDirection = Direction.Right;
 
     private SpriteRenderer _spriteRenderer; // For left/right/up/down move
 
@@ -50,18 +57,18 @@ public abstract class Entity : MonoBehaviour
         // Create a movement vector based on input
         Vector2 movement = new Vector2(horizontal, vertical);
 
-        if(this._isAttacking) {
+        if(this.isAttacking) {
             // animator.SetBool(this.verticalAnimationFlag, false);
             this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
             return;
         }
 
         if (horizontal > 0)  {
-            this._lastMoveDirection = Direction.Right;
+            this.lastMoveDirection = Direction.Right;
             this.MoveRightAnimation();
         }
         else if (horizontal < 0) {
-            this._lastMoveDirection = Direction.Left;
+            this.lastMoveDirection = Direction.Left;
             this.MoveLeftAnimation();
         }
         else {
@@ -69,11 +76,11 @@ public abstract class Entity : MonoBehaviour
         }
 
         if (vertical > 0) {
-            this._lastMoveDirection = Direction.Up;
+            this.lastMoveDirection = Direction.Up;
             this.MoveUpAnimation();
         }
         else if (vertical < 0) {
-            this._lastMoveDirection = Direction.Down;
+            this.lastMoveDirection = Direction.Down;
             this.MoveDownAnimation();
         }
         else {
@@ -88,25 +95,25 @@ public abstract class Entity : MonoBehaviour
         }
 
         // Apply movement scaled by speed and time.deltaTime for frame-rate independence
-        transform.Translate(movement * this._moveSpeed * Time.deltaTime);
+        transform.Translate(movement * this.moveSpeed * Time.deltaTime);
     }
     
     // ================ Helper function for all movement start ================
 
-    private void ResetMoveAnimation() {
+    protected void ResetMoveAnimation() {
         this.ChangeAnimationFlag(this._upAnimationFlag, false);
         this.ChangeAnimationFlag(this._downAnimationFlag, false);
         this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
     }
 
-    private void MoveRightAnimation() {
+    protected void MoveRightAnimation() {
         this.ChangeAnimationFlag(this._upAnimationFlag, false);
         this.ChangeAnimationFlag(this._downAnimationFlag, false);
         this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
         this._spriteRenderer.flipX = false; // Flip orientation
     }
 
-    private void MoveLeftAnimation() {
+    protected void MoveLeftAnimation() {
         this.ChangeAnimationFlag(this._upAnimationFlag, false);
         this.ChangeAnimationFlag(this._downAnimationFlag, false);
         this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
@@ -127,7 +134,7 @@ public abstract class Entity : MonoBehaviour
 
     // ================ Helper functions for attack ================
 
-    private void AttackHorizontalAnimation() {
+    protected void AttackHorizontalAnimation() {
         this.ResetMoveAnimation();
         this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
         this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
@@ -152,42 +159,57 @@ public abstract class Entity : MonoBehaviour
          this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
          this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
          this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
-         this._isAttacking = false;
+         this.isAttacking = false;
     }
 
     // Getting animation name becuase be are generic, yay
     protected void Attack() {
-        this._isAttacking = true;
+        this.isAttacking = true;
 
-        float castDistance = 1f; // How far the box is cast
-        Vector2 boxSize = new Vector2(this._attackSize, this._attackSize);
-
-        Vector2 direction = transform.right; // default
-
-        switch(this._lastMoveDirection) {
+        switch(this.lastMoveDirection) {
             case Direction.Right:
                 this.AttackHorizontalAnimation();
-                direction = transform.right;
                 break;
             case Direction.Left:
                 this.AttackHorizontalAnimation();
-                direction = -transform.right;
                 break;
             case Direction.Up:
                 this.AttackUpAnimation();
-                direction = transform.up;
                 break;
             case Direction.Down:
                 this.AttackDownAnimation();
-                direction = -transform.up;
                 break;
             default:
                 this.AttackHorizontalAnimation();
+                break;
+        }
+       
+    }
+
+    private void CheckIfAttackHit() {
+        Vector2 direction = transform.right; // default
+        switch(this.lastMoveDirection) {
+            case Direction.Right:
+                direction = transform.right;
+                break;
+            case Direction.Left:
+                direction = -transform.right;
+                break;
+            case Direction.Up:
+                direction = transform.up;
+                break;
+            case Direction.Down:
+                direction = -transform.up;
+                break;
+            default:
                 direction = transform.right;
                 break;
         }
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, castDistance, this._layerMask);
-         if (hit.collider != null) {
+
+        Vector2 boxSize = new Vector2(this.attackSize, this.attackSize);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, this.castDistance, this._layerMask);
+
+        if (hit.collider != null) {
             // Getting game object
             GameObject hitGameObject = hit.collider.gameObject;
 
@@ -195,18 +217,18 @@ public abstract class Entity : MonoBehaviour
                 Entity entity = hitGameObject.GetComponent<Entity>();
                 entity.TakeDamage(this._damage);
             } 
-         }
+        }
     }
 
     public void TakeDamage(int dmg) {
         this._health -= dmg;
 
         if(this._health <= 0) {
+            this.isDead = true;
             this.OnDeath();
         } else {
             this.ChangeAnimationFlag(this._hitAnimationFlag, true);
         }
-        
     }
 
     public void DisableHitAnimation() {
@@ -218,6 +240,10 @@ public abstract class Entity : MonoBehaviour
         if(flagName != "default") {
             this._animator.SetBool(flagName, flag);
         }
+    }
+
+    public float CurrentHealthPercent() {
+        return (float)this._health / (float)this._maxHealth;
     }
 
     protected abstract void OnDeath();
