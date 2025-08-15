@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d13f9dd9451f465d81377b1643a09a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRate: 0.5
-  _xCount: 12
+  _spawnRate: 5
+  _xCount: 14
   _yCount: 7
   _spawnerPrefab: {fileID: 6613102225564011767, guid: 68ec51e4f11ab42938700adecf1200ac, type: 3}
+  _spawnerXoffset: 0
+  _spawnerYoffset: -1
