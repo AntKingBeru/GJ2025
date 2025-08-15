@@ -10,13 +10,13 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private int _damage = 10;
 
     // [SerializeField] protected string idleAnimationFlag = "idle";
-    [SerializeField] private string _horizontalAnimationFlag = "horizontal";
-    [SerializeField] private string _upAnimationFlag = "up";
-    [SerializeField] private string _downAnimationFlag = "vertical";
-    [SerializeField] private string _attackHorizontalAnimationFlag = "attack";
-    [SerializeField] private string _attackUpAnimationFlag = "attack";
-    [SerializeField] private string _attackDownAnimationFlag = "attack";
-    [SerializeField] private string _hitAnimationFlag = "attack";
+    [SerializeField] private string _horizontalAnimationFlag = "default";
+    [SerializeField] private string _upAnimationFlag = "default";
+    [SerializeField] private string _downAnimationFlag = "default";
+    [SerializeField] private string _attackHorizontalAnimationFlag = "default";
+    [SerializeField] private string _attackUpAnimationFlag = "default";
+    [SerializeField] private string _attackDownAnimationFlag = "default";
+    [SerializeField] private string _hitAnimationFlag = "default";
     [SerializeField] private float _attackSize = 1.5f;
     [SerializeField] private LayerMask _layerMask;
 
@@ -52,7 +52,7 @@ public abstract class Entity : MonoBehaviour
 
         if(this._isAttacking) {
             // animator.SetBool(this.verticalAnimationFlag, false);
-            this._animator.SetBool(this._horizontalAnimationFlag, false);
+            this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
             return;
         }
 
@@ -67,7 +67,7 @@ public abstract class Entity : MonoBehaviour
             this.MoveLeftAnimation();
         }
         else {
-            this._animator.SetBool(this._horizontalAnimationFlag, false);
+            this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
         }
 
         if (vertical > 0) {
@@ -79,8 +79,8 @@ public abstract class Entity : MonoBehaviour
             this.MoveDownAnimation();
         }
         else {
-            this._animator.SetBool(this._upAnimationFlag, false);
-            this._animator.SetBool(this._downAnimationFlag, false);
+            this.ChangeAnimationFlag(this._upAnimationFlag, false);
+            this.ChangeAnimationFlag(this._downAnimationFlag, false);
         }
 
         // Normalize the vector to prevent faster diagonal movement
@@ -96,65 +96,65 @@ public abstract class Entity : MonoBehaviour
     // ================ Helper function for all movement start ================
 
     private void ResetMoveAnimation() {
-        this._animator.SetBool(this._horizontalAnimationFlag, false);
-        this._animator.SetBool(this._upAnimationFlag, false);
-        this._animator.SetBool(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, false);
         // this._spriteRenderer.flipX = false; // Flip orientation
     }
 
     private void MoveRightAnimation() {
-        this._animator.SetBool(this._horizontalAnimationFlag, true);
-        this._animator.SetBool(this._upAnimationFlag, false);
-        this._animator.SetBool(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
+        this.ChangeAnimationFlag(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, false);
         this._spriteRenderer.flipX = false; // Flip orientation
     }
 
     private void MoveLeftAnimation() {
-        this._animator.SetBool(this._horizontalAnimationFlag, true);
-        this._animator.SetBool(this._upAnimationFlag, false);
-        this._animator.SetBool(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
+        this.ChangeAnimationFlag(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, false);
         this._spriteRenderer.flipX = true; // Flip orientation
     }
 
     private void MoveUpAnimation() {
-        this._animator.SetBool(this._upAnimationFlag, true);
-        this._animator.SetBool(this._horizontalAnimationFlag, false);
-        this._animator.SetBool(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._upAnimationFlag, true);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, false);
     }
 
     private void MoveDownAnimation() {
-        this._animator.SetBool(this._downAnimationFlag, true);
-        this._animator.SetBool(this._horizontalAnimationFlag, false);
-        this._animator.SetBool(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, true);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._upAnimationFlag, false);
     }
 
     // ================ Helper functions for attack ================
 
     private void AttackHorizontalAnimation() {
         this.ResetMoveAnimation();
-        this._animator.SetBool(this._attackHorizontalAnimationFlag, true);
-        this._animator.SetBool(this._attackUpAnimationFlag, false);
-        this._animator.SetBool(this._attackDownAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, true);
+        this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
     }
 
     private void AttackDownAnimation() {
         this.ResetMoveAnimation();
-        this._animator.SetBool(this._attackDownAnimationFlag, true);
-        this._animator.SetBool(this._attackHorizontalAnimationFlag, false);
-        this._animator.SetBool(this._attackUpAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackDownAnimationFlag, true);
+        this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
     }
 
     private void AttackUpAnimation() {
         this.ResetMoveAnimation();
-        this._animator.SetBool(this._attackUpAnimationFlag, true);
-        this._animator.SetBool(this._attackHorizontalAnimationFlag, false);
-        this._animator.SetBool(this._attackDownAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackUpAnimationFlag, true);
+        this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
     }
 
     public void DisableAttack() {
-         this._animator.SetBool(this._attackHorizontalAnimationFlag, false);
-         this._animator.SetBool(this._attackUpAnimationFlag, false);
-         this._animator.SetBool(this._attackDownAnimationFlag, false);
+         this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
+         this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
+         this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
          this._isAttacking = false;
     }
 
@@ -185,7 +185,6 @@ public abstract class Entity : MonoBehaviour
                 direction = -transform.up;
                 break;
             default:
-                Debug.Log("Default attack, right");
                 this.AttackHorizontalAnimation();
                 direction = transform.right;
                 break;
@@ -207,15 +206,21 @@ public abstract class Entity : MonoBehaviour
 
         if(this._health <= 0) {
             this.OnDeath();
-            Destroy(gameObject);
         } else {
-            this._animator.SetBool(this._hitAnimationFlag, true);
+            this.ChangeAnimationFlag(this._hitAnimationFlag, true);
         }
         
     }
 
     public void DisableHitAnimation() {
-        this._animator.SetBool(this._hitAnimationFlag, false);
+        this.ChangeAnimationFlag(this._hitAnimationFlag, false);
+    }
+
+    // Changing animcation flag if not default
+    protected void ChangeAnimationFlag(string flagName, bool flag) {
+        if(flagName != "default") {
+            this._animator.SetBool(flagName, flag);
+        }
     }
 
     protected abstract void OnDeath();

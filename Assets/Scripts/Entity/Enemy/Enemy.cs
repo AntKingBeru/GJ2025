@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    [SerializeField] private string _deathAnimationFlag = "Death";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,6 +16,6 @@ public class Enemy : Entity
     }
 
     protected override void OnDeath() {
-        Debug.Log("Died!!");
+        this.ChangeAnimationFlag(this._deathAnimationFlag, true);
     }
 }
