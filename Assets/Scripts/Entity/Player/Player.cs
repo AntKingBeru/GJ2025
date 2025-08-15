@@ -47,7 +47,7 @@ public class Player : Entity
         {
             PickupPipe(other.gameObject);
         }
-        else if (other.CompareTag("SpawnPoint"))
+        else if (other.CompareTag("SpawnPoint") && _carriedObject != null)
         {
             this._isFixing = true;
             this._currentFix = other.gameObject;
