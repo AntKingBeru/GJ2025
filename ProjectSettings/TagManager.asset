@@ -42,7 +42,10 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Map
+  - name: Background
+    uniqueID: 1754412781
+    locked: 0
+  - name: Spawners
     uniqueID: 626315921
     locked: 0
   - name: Entity
