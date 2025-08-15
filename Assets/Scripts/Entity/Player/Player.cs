@@ -16,22 +16,14 @@ public class Player : Entity
         float horizontalInput = Input.GetAxis("Horizontal"); // A/D or Left/Right Arrow keys
         float verticalInput = Input.GetAxis("Vertical");   // W/S or Up/Down Arrow keys
 
-        if(horizontalInput > 0.01) {
-            horizontalInput = 1;
-        } else if (horizontalInput < -0.01) {
-            horizontalInput = -1;
-        }
+        if(horizontalInput > 0.01) horizontalInput = 1;
+         else if (horizontalInput < -0.01) horizontalInput = -1;
 
-        if(verticalInput > 0.01) {
-            verticalInput = 1;
-        } else if (verticalInput < -0.01) {
-            verticalInput = -1;
-        }
+        if(verticalInput > 0.01) verticalInput = 1;
+        else if (verticalInput < -0.01) verticalInput = -1;
+
 
         base.Move(horizontalInput, verticalInput);
-        this._animator.SetBool(this._horizontalAnimationFlag, horizontalInput != 0);
-        this._animator.SetBool(this._upAnimationFlag, verticalInput > 0);
-        this._animator.SetBool(this._downAnimationFlag, verticalInput < 0);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
