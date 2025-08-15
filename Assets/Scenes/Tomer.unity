@@ -380,16 +380,68 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: _damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: upAnimationFlag
+      value: Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: _upAnimationFlag
+      value: Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: layerMask.m_Bits
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: _layerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: downAnimationFlag
+      value: Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: _downAnimationFlag
+      value: Down
       objectReference: {fileID: 0}
     - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: attackAnimationFlag
       value: Attacking2
       objectReference: {fileID: 0}
     - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: attackUpAnimationFlag
+      value: AttackingUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: _attackUpAnimationFlag
+      value: AttackingUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: attackDownAnimationFlag
+      value: AttackingDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: horizontalAnimationFlag
       value: HorizontalWalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: _attackDownAnimationFlag
+      value: AttackingDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: _horizontalAnimationFlag
+      value: HorizontalWalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: attackHorizontalAnimationFlag
+      value: Attacking2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: _attackHorizontalAnimationFlag
+      value: Attacking2
       objectReference: {fileID: 0}
     - target: {fileID: 6996800611161509913, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: m_Layer
