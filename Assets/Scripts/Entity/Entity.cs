@@ -10,15 +10,15 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private int _damage = 10;
 
     // [SerializeField] protected string idleAnimationFlag = "idle";
-    [SerializeField] private string _horizontalAnimationFlag = "horizontal";
-    [SerializeField] private string _upAnimationFlag = "up";
-    [SerializeField] private string _downAnimationFlag = "vertical";
-    [SerializeField] private string _attackHorizontalAnimationFlag = "attack";
-    [SerializeField] private string _attackUpAnimationFlag = "attack";
-    [SerializeField] private string _attackDownAnimationFlag = "attack";
-    [SerializeField] private string _hitAnimationFlag = "attack";
-    [SerializeField] private float _attackSize = 1.5f;
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] protected string _horizontalAnimationFlag = "horizontal";
+    [SerializeField] protected string _upAnimationFlag = "up";
+    [SerializeField] protected string _downAnimationFlag = "vertical";
+    [SerializeField] protected string _attackHorizontalAnimationFlag = "attack";
+    [SerializeField] protected string _attackUpAnimationFlag = "attack";
+    [SerializeField] protected string _attackDownAnimationFlag = "attack";
+    [SerializeField] protected string _hitAnimationFlag = "attack";
+    [SerializeField] protected float _attackSize = 1.5f;
+    [SerializeField] protected LayerMask _layerMask;
 
     private bool _isAttacking = false;
 
@@ -34,7 +34,7 @@ public abstract class Entity : MonoBehaviour
     private SpriteRenderer _spriteRenderer; // For left/right/up/down move
 
     // For all animations
-    private Animator _animator;
+    protected Animator _animator;
 
     void Awake()
     {
