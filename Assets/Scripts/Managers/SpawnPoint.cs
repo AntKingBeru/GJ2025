@@ -2,17 +2,8 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-
-    private Vector2 _location;
-    private bool _open;
-    private GameObject _spawned;
-
-    public SpawnPoint(Vector2 location,GameObject spawned)
-    {
-        _open = false;
-        _location = location;
-        _spawned = spawned;
-    }
+    private bool _open = false;
+	[SerializeField] private GameObject _enemy;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,11 +26,12 @@ public class SpawnPoint : MonoBehaviour
     {
         _open = true;
         // Instantiate your object at spawnPosition
-        Instantiate(_spawned, _location, Quaternion.identity);
+		gameObject.SetActive(true);
     }
 
     public void Close()
     {
         _open = false;
+		gameObject.SetActive(false);
     }
 }
