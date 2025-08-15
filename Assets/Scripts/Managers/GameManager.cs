@@ -1,23 +1,34 @@
 using UnityEngine;
+using System.Collections;
 using UnityEditor; // Required for EditorApplication
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int _maxSpawnsAllowed = 20;
+    [SerializeField] private int _maxWaterBeforeFlood = 20000;
     [SerializeField] private GameObject _spawnManagerPrefab;
     private GameObject _spawnManager;
+    private int _currentFlood = 0;
     
     void Start()
     {
         _spawnManager = Instantiate(_spawnManagerPrefab);
+        StartCoroutine(CalculateFlood());
     }
 
-    // Update is called once per frame
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
+    // Update is called once per frame 1
     void Update()
     {
-        SpawnManager scriptReference = _spawnManager.GetComponent<SpawnManager>();
-
-        if (scriptReference.OpenPipesCount() >= _maxSpawnsAllowed)
+        if (_currentFlood >= _maxWaterBeforeFlood)
         {
 #if UNITY_EDITOR
             // Stop Play Mode in the Editor
@@ -26,6 +37,18 @@ public class GameManager : MonoBehaviour
         // Quit the built application
         Application.Quit();
 #endif
+        }
+    }
+
+    private IEnumerator CalculateFlood()
+    {
+        SpawnManager scriptReference = _spawnManager.GetComponent<SpawnManager>();
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            var currentOpenPipes = scriptReference.OpenPipesCount();
+            _currentFlood += currentOpenPipes;
         }
     }
 }

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f90f7617c1124a44bded650d5b90d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpawnsAllowed: 40
+  _maxWaterBeforeFlood: 200000
   _spawnManagerPrefab: {fileID: 7635632918404583939, guid: 7cb63e43c85ee4a5daf3bbaf1d894085, type: 3}
 --- !u!4 &936035433
 Transform:

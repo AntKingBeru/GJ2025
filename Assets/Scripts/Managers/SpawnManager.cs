@@ -22,6 +22,16 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
     }
+    
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 
     private void InitializeSpawnPoints()
     {

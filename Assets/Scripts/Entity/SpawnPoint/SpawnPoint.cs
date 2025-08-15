@@ -19,6 +19,15 @@ public class SpawnPoint : MonoBehaviour
     {
 
     }
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 
     public bool IsOpen
     {
