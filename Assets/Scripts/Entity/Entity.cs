@@ -207,7 +207,8 @@ public abstract class Entity : MonoBehaviour
                 direction = transform.right;
                 break;
         }
-
+        
+        Debug.Log(direction);
         Vector2 boxSize = new Vector2(this.attackSize, this.attackSize);
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, this.castDistance, this._layerMask);
 
