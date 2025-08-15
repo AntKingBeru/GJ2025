@@ -29,6 +29,9 @@ public class Player : Entity
         }
 
         base.Move(horizontalInput, verticalInput);
+        this._animator.SetBool(this._horizontalAnimationFlag, horizontalInput != 0);
+        this._animator.SetBool(this._upAnimationFlag, verticalInput > 0);
+        this._animator.SetBool(this._downAnimationFlag, verticalInput < 0);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

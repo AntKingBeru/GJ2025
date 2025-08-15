@@ -34,7 +34,7 @@ public abstract class Entity : MonoBehaviour
     private SpriteRenderer _spriteRenderer; // For left/right/up/down move
 
     // For all animations
-    private Animator _animator;
+    protected Animator _animator;
 
     void Awake()
     {
