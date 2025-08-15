@@ -331,10 +331,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 438475928877292078, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2515841575959712193, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.1
@@ -375,81 +371,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: damage
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: _damage
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: upAnimationFlag
-      value: Up
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: _upAnimationFlag
-      value: Up
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: layerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: _layerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: downAnimationFlag
-      value: Down
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: _downAnimationFlag
-      value: Down
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: attackAnimationFlag
-      value: Attacking2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: attackUpAnimationFlag
-      value: AttackingUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: _attackUpAnimationFlag
-      value: AttackingUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: attackDownAnimationFlag
-      value: AttackingDown
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: horizontalAnimationFlag
-      value: HorizontalWalk
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: _attackDownAnimationFlag
-      value: AttackingDown
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: _horizontalAnimationFlag
-      value: HorizontalWalk
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: attackHorizontalAnimationFlag
-      value: Attacking2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: _attackHorizontalAnimationFlag
-      value: Attacking2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6996800611161509913, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2074299660600317739, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}

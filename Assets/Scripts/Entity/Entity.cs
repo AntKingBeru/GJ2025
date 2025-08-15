@@ -16,6 +16,7 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private string _attackHorizontalAnimationFlag = "attack";
     [SerializeField] private string _attackUpAnimationFlag = "attack";
     [SerializeField] private string _attackDownAnimationFlag = "attack";
+    [SerializeField] private string _hitAnimationFlag = "attack";
     [SerializeField] private float _attackSize = 1.5f;
     [SerializeField] private LayerMask _layerMask;
 
@@ -81,21 +82,6 @@ public abstract class Entity : MonoBehaviour
             this._animator.SetBool(this._upAnimationFlag, false);
             this._animator.SetBool(this._downAnimationFlag, false);
         }
-
-        // Does not need this
-        // if(horizontal != 0 && vertical != 0) {
-        //     switch(this._lastMoveDirection) {
-        //         case Direction.Right:
-        //             Debug.Log("Move right!!!!!");
-        //             break;
-        //         default:
-        //             Debug.Log("Move left!!!!!");
-        //             break;
-        //     }
-        //     // if(this.lastMoveDirection == Direction.Right) this.MoveRightAnimation();
-        //     // else this.MoveLeftAnimation();
-        // }
-
 
         // Normalize the vector to prevent faster diagonal movement
         if (movement.magnitude > 1f)
@@ -183,22 +169,18 @@ public abstract class Entity : MonoBehaviour
 
         switch(this._lastMoveDirection) {
             case Direction.Right:
-                Debug.Log("Right attack");
                 this.AttackHorizontalAnimation();
                 direction = transform.right;
                 break;
             case Direction.Left:
-                Debug.Log("Left attack");
                 this.AttackHorizontalAnimation();
                 direction = -transform.right;
                 break;
             case Direction.Up:
-                Debug.Log("Up attack");
                 this.AttackUpAnimation();
                 direction = transform.up;
                 break;
             case Direction.Down:
-                Debug.Log("Down attack");
                 this.AttackDownAnimation();
                 direction = -transform.up;
                 break;
@@ -226,8 +208,14 @@ public abstract class Entity : MonoBehaviour
         if(this._health <= 0) {
             this.OnDeath();
             Destroy(gameObject);
+        } else {
+            this._animator.SetBool(this._hitAnimationFlag, true);
         }
         
+    }
+
+    public void DisableHitAnimation() {
+        this._animator.SetBool(this._hitAnimationFlag, false);
     }
 
     protected abstract void OnDeath();
