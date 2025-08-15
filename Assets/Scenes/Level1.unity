@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f90f7617c1124a44bded650d5b90d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxWaterBeforeFlood: 200
+  _maxWaterBeforeFlood: 20
   _spawnManagerPrefab: {fileID: 7635632918404583939, guid: 7cb63e43c85ee4a5daf3bbaf1d894085, type: 3}
 --- !u!4 &936035433
 Transform:
@@ -725,9 +725,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 105753423158733484, guid: 44253cec0157f4d9db5eb6510d1edf5d, type: 3}
+      propertyPath: m_TagString
+      value: YouLose
+      objectReference: {fileID: 0}
+    - target: {fileID: 105753423158733484, guid: 44253cec0157f4d9db5eb6510d1edf5d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 369655644924340235, guid: 44253cec0157f4d9db5eb6510d1edf5d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7124250084591480585, guid: 44253cec0157f4d9db5eb6510d1edf5d, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 7647631536185350501, guid: 44253cec0157f4d9db5eb6510d1edf5d, type: 3}
       propertyPath: m_Pivot.x
