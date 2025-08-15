@@ -9,8 +9,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int _xCount;
     [SerializeField] private int _yCount;
     [SerializeField] private GameObject _spawnerPrefab;
-    [SerializeField] private float _spawnerXoffset;
-    [SerializeField] private float _spawnerYoffset;
     
     private List<GameObject> _spawnPoints;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,8 +46,7 @@ public class SpawnManager : MonoBehaviour
             
             for (var j = 0; j < _yCount; j++)
             {
-                var location = new Vector2(x, y) + new Vector2(_spawnerXoffset, _spawnerYoffset);
-                GameObject spawner = Instantiate(_spawnerPrefab,location,Quaternion.identity);
+                GameObject spawner = Instantiate(_spawnerPrefab,new Vector2(x,y),Quaternion.identity);
                 SpawnPoint scriptReference = spawner.GetComponent<SpawnPoint>();
                 // scriptReference.
                 _spawnPoints.Add(spawner);
