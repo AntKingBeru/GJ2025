@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: 78fff170c2dc585459b07db702405f42
+guid: afb2b4e589945a946ae2860da5006bea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3822443602814269865
-    second: Base_Plumber_Attack_Down-Sheet_0
+      213: -4882344175020009383
+    second: Buttons_Strating_Screen_0
   - first:
-      213: -5711158680441366038
-    second: Base_Plumber_Attack_Down-Sheet_1
+      213: -7864749798091061183
+    second: Buttons_Strating_Screen_1
   - first:
-      213: -7582374312882853868
-    second: Base_Plumber_Attack_Down-Sheet_2
-  - first:
-      213: -7757450648676285930
-    second: Base_Plumber_Attack_Down-Sheet_3
-  - first:
-      213: 3451868445710639750
-    second: Base_Plumber_Attack_Down-Sheet_4
+      213: 6771867549765250808
+    second: Buttons_Strating_Screen_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,111 +106,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Base_Plumber_Attack_Down-Sheet_0
+      name: Buttons_Strating_Screen_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
-        width: 32
-        height: 32
+        x: 85
+        y: 53
+        width: 56
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a975bf543c0c0530800000000000000
-      internalID: 3822443602814269865
+      spriteID: 9581cb037dd6e3cb0800000000000000
+      internalID: -4882344175020009383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Base_Plumber_Attack_Down-Sheet_1
+      name: Buttons_Strating_Screen_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
-        width: 32
-        height: 32
+        x: 86
+        y: 69
+        width: 54
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ae9576c6073edb0b0800000000000000
-      internalID: -5711158680441366038
+      spriteID: 14805755abbcad290800000000000000
+      internalID: -7864749798091061183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Base_Plumber_Attack_Down-Sheet_2
+      name: Buttons_Strating_Screen_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 16
-        width: 32
-        height: 32
+        x: 85
+        y: 37
+        width: 58
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 418229e4cbef5c690800000000000000
-      internalID: -7582374312882853868
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Base_Plumber_Attack_Down-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 16
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 612c60b5cbff75490800000000000000
-      internalID: -7757450648676285930
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Base_Plumber_Attack_Down-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 16
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 68266f5001087ef20800000000000000
-      internalID: 3451868445710639750
+      spriteID: 8fea0c958a18afd50800000000000000
+      internalID: 6771867549765250808
       vertices: []
       indices: 
       edges: []
@@ -225,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5b9326ea3b20a5e4b8af4f57e1ba10e9
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Base_Plumber_Attack_Down-Sheet_0: 3822443602814269865
-      Base_Plumber_Attack_Down-Sheet_1: -5711158680441366038
-      Base_Plumber_Attack_Down-Sheet_2: -7582374312882853868
-      Base_Plumber_Attack_Down-Sheet_3: -7757450648676285930
-      Base_Plumber_Attack_Down-Sheet_4: 3451868445710639750
+      Buttons_Strating_Screen_0: -4882344175020009383
+      Buttons_Strating_Screen_1: -7864749798091061183
+      Buttons_Strating_Screen_2: 6771867549765250808
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
