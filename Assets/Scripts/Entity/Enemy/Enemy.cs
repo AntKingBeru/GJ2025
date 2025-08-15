@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    [SerializeField] private string _deathAnimationFlag = "Death";
+    [SerializeField] private GameObject _deadMePrefab;
     private Transform _target;
-    private bool wasInRadius = false;
+    private bool _wasInRadius;
+    
     
     void Start()
     {
@@ -58,12 +59,19 @@ public class Enemy : Entity
         float distance = Vector3.Distance(transform.position, this._target.position);
 
         if(distance < this.castDistance) {
-            if(!this.wasInRadius) this.Attack();
-            this.wasInRadius = true;
-        } else this.wasInRadius = false;
+            if(!this._wasInRadius) this.Attack();
+            this._wasInRadius = true;
+        } else this._wasInRadius = false;
     }
 
-    protected override void OnDeath() {
-        this.ChangeAnimationFlag(this._deathAnimationFlag, true);
+    protected override void OnDeath()
+    {
+        Instantiate(_deadMePrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    void OnTriggerEnter2D()
+    {
+        
     }
 }
