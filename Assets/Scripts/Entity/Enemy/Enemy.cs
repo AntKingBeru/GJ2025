@@ -3,9 +3,14 @@ using UnityEngine;
 public class Enemy : Entity
 {
     [SerializeField] private string _deathAnimationFlag = "Death";
-    [SerializeField] private Transform _target;
+    private Transform _target;
     private bool wasInRadius = false;
-
+    
+    void Start()
+    {
+        _target = FindFirstObjectByType<Player>().transform;
+    }
+    
     // Update is called once per frame
     void Update()
     {
