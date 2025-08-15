@@ -14,7 +14,7 @@ public class DeadEnemy : MonoBehaviour
     // Timer until object is destroyed on its own
     private IEnumerator DeathTimer()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(20);
         Destroy(gameObject);
     }
 }
