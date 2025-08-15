@@ -5,8 +5,6 @@ public abstract class Entity : MonoBehaviour
 {
     [SerializeField] protected float moveSpeed = 1f;
 
-    [SerializeField] private int _health = 100;
-
     [SerializeField] private int _damage = 10;
 
     [SerializeField] private int _maxHealth = 100;
@@ -19,9 +17,9 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private string _hitAnimationFlag = "default";
     [SerializeField] protected float attackSize = 1.5f;
     [SerializeField] private LayerMask _layerMask;
-
+    private int _health;
     protected bool isAttacking = false;
-    protected float castDistance = 1f; // How far the box is cast
+    protected float castDistance = 0.5f; // How far the box is cast
     protected bool isHit = false;
     public bool isDead
     {
@@ -58,6 +56,8 @@ public abstract class Entity : MonoBehaviour
 
         // Getting sprite renderer
         this._spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        this._health = this._maxHealth;
 
     }
 
@@ -226,7 +226,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int dmg) {
+    public virtual void TakeDamage(int dmg) {
         this._health -= dmg;
         this.isHit = true;
 
@@ -242,12 +242,12 @@ public abstract class Entity : MonoBehaviour
         this.isHit = false;
     }
 
-    // Changing animcation flag if not default
-    protected void ChangeAnimationFlag(string flagName, bool flag) {
+    // Changing animation flag if not default
+    protected void ChangeAnimationFlag(string flagName, bool on) {
         if(flagName != "default") {
-            this._animator.SetBool(flagName, flag);
+            this._animator.SetBool(flagName, on);
         }
     }
-
+    
     protected abstract void OnDeath();
 }

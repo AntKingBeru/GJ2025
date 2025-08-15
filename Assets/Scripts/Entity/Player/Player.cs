@@ -6,6 +6,7 @@ public class Player : Entity
     [SerializeField] private string _deathAnimationFlag = "Death";
     private string _fixAnimationFlag = "Fix";
     private bool _isFixing;
+    private bool _fixInterrupted;
         
     private GameObject _carriedObject;
     private GameObject _currentFix;
@@ -14,7 +15,7 @@ public class Player : Entity
     // Update is called once per frame
     void Update()
     {
-        if (this._isFixing) return; // Skip iteration if is fixing
+        if (this._isFixing) return; // Skip iteration while fixing
         
         if(this.isHit) {
             this.ResetMoveAnimation();
@@ -48,7 +49,7 @@ public class Player : Entity
         }
         else if (other.CompareTag("SpawnPoint"))
         {
-            Debug.Log("Walked on pipe");
+            this._isFixing = true;
             this._currentFix = other.gameObject;
             this.ChangeAnimationFlag(this._fixAnimationFlag, true);
         }
@@ -83,6 +84,7 @@ public class Player : Entity
     public void DisableFixAnimation()
     {
         this.ChangeAnimationFlag(this._fixAnimationFlag, false);
+        this._isFixing = false;
         // TODO - Trigger flood change
         if(_currentFix != null)
         {
@@ -91,6 +93,18 @@ public class Player : Entity
             Destroy(_carriedObject);
             _carriedObject = null;
         } 
+    }
+
+    public override void TakeDamage(int dmg)
+    {
+        base.TakeDamage(dmg);
+        Debug.Log("Got damage");
+        // Disabling fix on take damage
+        if (this._isFixing)
+        {
+            this.ChangeAnimationFlag(this._fixAnimationFlag, false);
+            this._isFixing = false;
+        }
     }
 
     protected override void OnDeath() {
