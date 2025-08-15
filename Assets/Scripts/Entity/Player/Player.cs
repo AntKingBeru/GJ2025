@@ -4,6 +4,8 @@ public class Player : Entity
 {
 
     [SerializeField] private string _deathAnimationFlag = "Death";
+    private string _fixAnimationFlag = "Fix";
+    private bool _isFixing;
         
     private GameObject _carriedObject;
     
@@ -35,6 +37,8 @@ public class Player : Entity
     // Update is called once per frame
     void Update()
     {
+        if (this._isFixing) return; // Skip iteration if is fixing
+        
         if(this.isHit) {
             this.ResetMoveAnimation();
             this.DisableAttack();
@@ -63,14 +67,24 @@ public class Player : Entity
     {
         if (other.CompareTag("DeadEnemy"))
         {
-            this.PickUp(other.gameObject);
-            Debug.Log("Got dead enemy");
+            PickupPipe(other.gameObject);
         }
-        // Debug.Log(col.gameObject.name + " : " + gameObject.name);
-        // Debug.Log("Hello, it triggered");
+        else if (other.CompareTag("SpawnPoint"))
+        {
+            DropPipe(other.gameObject);
+        }
     }
 
-    private void PickUp(GameObject objectToPickUp)
+    private void DropPipe(GameObject spawnPoint)
+    {
+        // Drop the object
+        Rigidbody2D rb = _carriedObject.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.isKinematic = false;
+        _carriedObject.transform.SetParent(null);
+        _carriedObject = null;
+    }
+
+    private void PickupPipe(GameObject objectToPickUp)
     {
         if (_carriedObject == null)
         {
