@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  _damage: 10
+  _damage: 0
   _maxHealth: 90
   _horizontalAnimationFlag: Walk
   _upAnimationFlag: Walk
@@ -112,7 +112,7 @@ MonoBehaviour:
   _attackUpAnimationFlag: Attack
   _attackDownAnimationFlag: Attack
   _hitAnimationFlag: Hit
-  attackSize: 1
+  attackSize: 1.5
   _layerMask:
     serializedVersion: 2
     m_Bits: 1
