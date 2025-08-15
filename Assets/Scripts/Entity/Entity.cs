@@ -13,8 +13,8 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private string horizontalAnimationFlag = "horizontal";
     [SerializeField] private string verticalAnimationFlag = "vertical";
     [SerializeField] private string attackAnimationFlag = "attack";
-
     [SerializeField] private float attackSize = 1.5f;
+    [SerializeField] private LayerMask layerMask;
 
     private bool isAttacking = false;
 
@@ -29,17 +29,11 @@ public abstract class Entity : MonoBehaviour
 
     private SpriteRenderer spriteRenderer; // For left/right/up/down move
 
-    // Weapon collider to get hit right
-    private BoxCollider2D weaponCollider;
-
     // For all animations
     private Animator animator;
 
     void Awake()
     {
-        weaponCollider = GetComponentInChildren<BoxCollider2D>();
-        weaponCollider.enabled = false; // Start with collider disabled
-
         // Getting animator
         animator = GetComponent<Animator>();
 
@@ -64,7 +58,7 @@ public abstract class Entity : MonoBehaviour
 
         if (vertical > 0) this.OnMoveUp();
         else if (vertical < 0) this.OnMoveDown();
-        else animator.SetBool(this.verticalAnimationFlag, false);
+        // else animator.SetBool(this.verticalAnimationFlag, false);
 
 
         // Normalize the vector to prevent faster diagonal movement
@@ -117,60 +111,43 @@ public abstract class Entity : MonoBehaviour
 
         animator.SetBool(this.attackAnimationFlag, true);
 
+        float castDistance = 1f; // How far the box is cast
+        Vector2 boxSize = new Vector2(this.attackSize, this.attackSize);
+
+        Vector2 direction = transform.right; // default
+
         switch(lastMoveDirection) {
             case Direction.Right:
                 Debug.Log("Right attack");
+                direction = transform.right;
                 break;
             case Direction.Left:
                 Debug.Log("Left attack");
+                direction = -transform.right;
                 break;
             case Direction.Up:
                 Debug.Log("Up attack");
+                direction = transform.up;
                 break;
             case Direction.Down:
                 Debug.Log("Down attack");
+                direction = -transform.up;
                 break;
             default:
                 Debug.Log("Default attack, right");
+                direction = transform.right;
                 break;
         }
-        // SquereCast
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, castDistance, this.layerMask);
+         if (hit.collider != null) {
+            // Getting game object
+            GameObject hitGameObject = hit.collider.gameObject;
 
-
-        // Debug.Log("Triggered");
-        // if (other.CompareTag("Enemy")) // Check if the collided object is an enemy
-
-        // weaponCollider.enabled = false; // Removing weapon collider
-
-        // // animator.Play(this.idleAnimation, 0, 0f);
-    }
-
-    // For when attack succeed
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Triggered");
-        if (other.CompareTag("Enemy")) // Check if the collided object is an enemy
-        {
-            // Example: Call a method on the enemy to take damage
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(this.damage);
-            }
-            // Optional: Disable collider after first hit to prevent multiple hits per swing
-            weaponCollider.enabled = false; 
-        }
-
-        else if (other.CompareTag("Player")) { // Check if collided with player
-            // Example: Call a method on the enemy to take damage
-            Player player = other.GetComponent<Player>();
-            if (player != null)
-            {
-                player.TakeDamage(this.damage);
-            }
-            // Optional: Disable collider after first hit to prevent multiple hits per swing
-            weaponCollider.enabled = false; 
-        } 
+            if(hitGameObject.CompareTag("Enemy") || hitGameObject.CompareTag("Player")) {
+                Entity entity = hitGameObject.GetComponent<Entity>();
+                entity.TakeDamage(this.damage);
+            } 
+         }
     }
 
     public void TakeDamage(int dmg) {
