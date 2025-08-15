@@ -4,15 +4,17 @@ public class Enemy : Entity
 {
     [SerializeField] private string _deathAnimationFlag = "Death";
     [SerializeField] private Transform _target;
-    // // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-    // {
-        
-    // }
+    private bool wasInRadius = false;
 
     // Update is called once per frame
     void Update()
     {
+        if(this.isHit) {
+            this.ResetMoveAnimation();
+            this.DisableAttack();
+            return;
+        }
+
         if(!this.isAttacking && !this.isDead && this._target != null) {
             this.MoveTowardsPlayer();
             this.CheckAttack();
@@ -49,8 +51,11 @@ public class Enemy : Entity
 
     private void CheckAttack(){
         float distance = Vector3.Distance(transform.position, this._target.position);
-        // Perform actions when the object is within radius
-        if (distance < this.castDistance) this.Attack();
+
+        if(distance < this.castDistance) {
+            if(!this.wasInRadius) this.Attack();
+            this.wasInRadius = true;
+        } else this.wasInRadius = false;
     }
 
     protected override void OnDeath() {
