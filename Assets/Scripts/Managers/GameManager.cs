@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor; // Required for EditorApplication
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,8 +38,10 @@ public class GameManager : MonoBehaviour
         if (_currentFlood >= _maxWaterBeforeFlood ||
             _player.isDead)
         {
-        // Show the loseing screen
-        Application.Quit();
+            // Show the losing screen
+            var losingScreen = GameObject.Find("YouLose");
+            var image = losingScreen.GetComponent<Image>();
+            image.enabled = true;
         }
     }
 

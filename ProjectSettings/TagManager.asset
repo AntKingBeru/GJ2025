@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - DeadEnemy
+  - YouLose
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
