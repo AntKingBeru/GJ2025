@@ -42,5 +42,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Map
+    uniqueID: 626315921
+    locked: 0
+  - name: Entity
+    uniqueID: 1527434193
+    locked: 0
   m_RenderingLayers:
   - Default

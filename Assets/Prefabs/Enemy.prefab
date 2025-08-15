@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1527434193
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -100,3 +100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441820bdcac023d479821a1628d4beae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 1
+  _health: 100
+  _damage: 10
+  _horizontalAnimationFlag: horizontal
+  _upAnimationFlag: up
+  _downAnimationFlag: vertical
+  _attackHorizontalAnimationFlag: attack
+  _attackUpAnimationFlag: attack
+  _attackDownAnimationFlag: attack
+  _attackSize: 1.5
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
