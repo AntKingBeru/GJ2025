@@ -22,7 +22,6 @@ public class Player : Entity
         if(verticalInput > 0.01) verticalInput = 1;
         else if (verticalInput < -0.01) verticalInput = -1;
 
-
         base.Move(horizontalInput, verticalInput);
 
         if (Input.GetKeyDown(KeyCode.Space))

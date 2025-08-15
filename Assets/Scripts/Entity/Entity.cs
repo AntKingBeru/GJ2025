@@ -39,10 +39,10 @@ public abstract class Entity : MonoBehaviour
     void Awake()
     {
         // Getting animator
-        _animator = GetComponent<Animator>();
+        this._animator = GetComponent<Animator>();
 
         // Getting sprite renderer
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        this._spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -55,8 +55,6 @@ public abstract class Entity : MonoBehaviour
             this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
             return;
         }
-
-        // Calcuate animation to active
 
         if (horizontal > 0)  {
             this._lastMoveDirection = Direction.Right;
@@ -90,65 +88,64 @@ public abstract class Entity : MonoBehaviour
         }
 
         // Apply movement scaled by speed and time.deltaTime for frame-rate independence
-        transform.Translate(movement * _moveSpeed * Time.deltaTime);
+        transform.Translate(movement * this._moveSpeed * Time.deltaTime);
     }
     
     // ================ Helper function for all movement start ================
 
     private void ResetMoveAnimation() {
-        this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
         this.ChangeAnimationFlag(this._upAnimationFlag, false);
         this.ChangeAnimationFlag(this._downAnimationFlag, false);
-        // this._spriteRenderer.flipX = false; // Flip orientation
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
     }
 
     private void MoveRightAnimation() {
-        this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
         this.ChangeAnimationFlag(this._upAnimationFlag, false);
         this.ChangeAnimationFlag(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
         this._spriteRenderer.flipX = false; // Flip orientation
     }
 
     private void MoveLeftAnimation() {
-        this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
         this.ChangeAnimationFlag(this._upAnimationFlag, false);
         this.ChangeAnimationFlag(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
         this._spriteRenderer.flipX = true; // Flip orientation
     }
 
     private void MoveUpAnimation() {
-        this.ChangeAnimationFlag(this._upAnimationFlag, true);
         this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
         this.ChangeAnimationFlag(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._upAnimationFlag, true);
     }
 
     private void MoveDownAnimation() {
-        this.ChangeAnimationFlag(this._downAnimationFlag, true);
         this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
         this.ChangeAnimationFlag(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, true);
     }
 
     // ================ Helper functions for attack ================
 
     private void AttackHorizontalAnimation() {
         this.ResetMoveAnimation();
-        this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, true);
         this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
         this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, true);
     }
 
     private void AttackDownAnimation() {
         this.ResetMoveAnimation();
-        this.ChangeAnimationFlag(this._attackDownAnimationFlag, true);
         this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
         this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackDownAnimationFlag, true);
     }
 
     private void AttackUpAnimation() {
         this.ResetMoveAnimation();
-        this.ChangeAnimationFlag(this._attackUpAnimationFlag, true);
         this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
         this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackUpAnimationFlag, true);
     }
 
     public void DisableAttack() {

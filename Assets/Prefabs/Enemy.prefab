@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2938567114111772032}
   - component: {fileID: 6398884502276924168}
   - component: {fileID: 4845332848912798607}
-  - component: {fileID: 260049831900205623}
+  - component: {fileID: 4571041511817173783}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.38, y: -0.14, z: 10}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,19 +104,19 @@ MonoBehaviour:
   _moveSpeed: 1
   _health: 100
   _damage: 10
-  _horizontalAnimationFlag: horizontal
-  _upAnimationFlag: up
-  _downAnimationFlag: vertical
-  _attackHorizontalAnimationFlag: attack
-  _attackUpAnimationFlag: attack
-  _attackDownAnimationFlag: attack
-  _hitAnimationFlag: attack
+  _horizontalAnimationFlag: Walk
+  _upAnimationFlag: Walk
+  _downAnimationFlag: Walk
+  _attackHorizontalAnimationFlag: Attack
+  _attackUpAnimationFlag: Attack
+  _attackDownAnimationFlag: Attack
+  _hitAnimationFlag: Hit
   _attackSize: 1.5
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   _deathAnimationFlag: Death
---- !u!95 &260049831900205623
+--- !u!95 &4571041511817173783
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
