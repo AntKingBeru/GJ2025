@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private int _maxWaterBeforeFlood = 20000;
+    [SerializeField] private int _maxWaterPerSpawn = 200;
     [SerializeField] private GameObject _spawnManagerPrefab;
     private GameObject _spawnManager;
+    private GameObject _youLoseScreen;
     private Player _player;
     private int _currentFlood = 0;
     
@@ -20,6 +22,17 @@ public class GameManager : MonoBehaviour
         _spawnManager = Instantiate(_spawnManagerPrefab);
         StartCoroutine(CalculateFlood());
         _player = FindFirstObjectByType<Player>();
+        
+        var children = gameObject.GetComponentsInChildren<Transform>();
+        foreach (var child in children)
+        {
+            if (child.name == "YouLose")
+            {
+                _youLoseScreen = child.gameObject;
+                _youLoseScreen.SetActive(false);
+                break;
+            }
+        }
     }
 
     void OnDisable()
@@ -38,10 +51,9 @@ public class GameManager : MonoBehaviour
         if (_currentFlood >= _maxWaterBeforeFlood ||
             _player.isDead)
         {
+            Entity.pause = true;
             // Show the losing screen
-            var losingScreen = GameObject.Find("YouLose");
-            var image = losingScreen.GetComponent<Image>();
-            image.enabled = true;
+            _youLoseScreen.SetActive(true);
         }
     }
 
@@ -53,7 +65,18 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             var currentOpenPipes = scriptReference.OpenPipesCount();
-            _currentFlood += currentOpenPipes;
+
+            var maxFloodAllowed = _maxWaterPerSpawn * currentOpenPipes;
+            
+            if (_currentFlood >= maxFloodAllowed)
+            {
+                if (_currentFlood - currentOpenPipes < maxFloodAllowed)
+                    _currentFlood = maxFloodAllowed;
+                else
+                    _currentFlood -= currentOpenPipes;
+            }
+            else
+                _currentFlood += currentOpenPipes;
         }
     }
 }
