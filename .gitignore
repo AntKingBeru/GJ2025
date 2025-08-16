@@ -102,3 +102,5 @@ InitTestScene*.unity*
 .vscode/settings.json
 
 Dist
+Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF.asset
+Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset
