@@ -69,6 +69,5 @@ public class SpawnPoint : MonoBehaviour
             if(Random.Range(0f, 100f) <= _spawnChance)
                 Instantiate(_enemy,gameObject.transform.position,gameObject.transform.rotation).SetActive(true);
         }
-
     }
 }

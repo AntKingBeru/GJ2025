@@ -36,12 +36,14 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void PlaySound(string soundName)
+    public void PlaySound(string soundName, float duration = 0f)
     {
         foreach (Sound s in sounds)
         {
             if (s.name == soundName)
             {
+                if (duration > 0f)
+                    s.audioSource.time = s.audioSource.clip.length - duration;
                 s.audioSource.Play();
             }
         }
