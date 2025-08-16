@@ -3,26 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Awake()
     {
-        
+        DontDestroyOnLoad(this.gameObject);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void StartGame()
     {
-        SceneFader.instance.LoadSceneWithFade("Level1");
+        SceneFader.instance.LoadSceneWithFade(1);
     }
 
     public void Tutorial()
     {
-        
+        SceneFader.instance.LoadSceneWithFade(2);
     }
 
     public void QuitGame()
@@ -32,11 +25,11 @@ public class MenuManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneFader.instance.LoadSceneWithFade("MainMenu");
+        SceneFader.instance.LoadSceneWithFade(0);
     }
 
     public void TryAgain()
     {
-        SceneFader.instance.LoadSceneWithFade(SceneManager.GetActiveScene().name);
+        SceneFader.instance.LoadSceneWithFade(SceneManager.GetActiveScene().buildIndex);
     }
 }
