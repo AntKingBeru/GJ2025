@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d13f9dd9451f465d81377b1643a09a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRate: 8
+  _spawnRate: 6
   _xCount: 14
   _yCount: 7
   _spawnerXoffset: 0
