@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8078305873728646a378de1a5116276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
+  _sounds:
   - name: PlayerAttack
     clip: {fileID: 8300000, guid: dfabd56acc89a7646a59e296b4037f33, type: 3}
     volume: 1
