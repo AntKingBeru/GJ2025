@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1527434193
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -3366140323026661590, guid: 51cdb5d6deb0d754793b51a6156f15ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103,9 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  _health: 100
   _damage: 10
-  _maxHealth: 100
+  _maxHealth: 90
   _horizontalAnimationFlag: Walk
   _upAnimationFlag: Walk
   _downAnimationFlag: Walk
@@ -113,12 +112,11 @@ MonoBehaviour:
   _attackUpAnimationFlag: Attack
   _attackDownAnimationFlag: Attack
   _hitAnimationFlag: Hit
-  attackSize: 1
+  attackSize: 1.5
   _layerMask:
     serializedVersion: 2
     m_Bits: 1
-  _deathAnimationFlag: Death
-  _target: {fileID: 0}
+  _deadMePrefab: {fileID: 3845665314980062014, guid: 8f14e382d54d36d4aa647ce6b4f2ccb3, type: 3}
 --- !u!95 &4571041511817173783
 Animator:
   serializedVersion: 7
@@ -175,7 +173,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.077435315, y: -0.0211187}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -185,5 +183,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6339418, y: 0.84512913}
   m_EdgeRadius: 0

@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Level1");
+        SceneFader.instance.LoadSceneWithFade("Level1");
     }
 
     public void Tutorial()
@@ -28,5 +28,15 @@ public class MenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneFader.instance.LoadSceneWithFade("MainMenu");
+    }
+
+    public void TryAgain()
+    {
+        SceneFader.instance.LoadSceneWithFade(SceneManager.GetActiveScene().name);
     }
 }

@@ -8,15 +8,24 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _spawnRate;
     [SerializeField] private int _xCount;
     [SerializeField] private int _yCount;
-    [SerializeField] private GameObject _spawnerPrefab;
     [SerializeField] private float _spawnerXoffset;
     [SerializeField] private float _spawnerYoffset;
+    private SpawnPoint _spawner;
+    private Enemy _enemy;
     
-    private List<GameObject> _spawnPoints;
+    private List<SpawnPoint> _spawnPoints;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _spawner = gameObject.GetComponentInChildren<SpawnPoint>();
+        _spawner.gameObject.SetActive(false);
+        _enemy = gameObject.GetComponentInChildren<Enemy>();
+        _enemy.gameObject.SetActive(false);
         InitializeSpawnPoints();
+    }
+
+    void Awake()
+    {
         StartCoroutine(StartSpawning());
     }
 
@@ -28,6 +37,11 @@ public class SpawnManager : MonoBehaviour
     void OnDisable()
     {
         StopAllCoroutines();
+
+        foreach (var spawnPoint in _spawnPoints)
+        {
+            spawnPoint.Close();
+        }
     }
 
     void OnDestroy()
@@ -37,8 +51,8 @@ public class SpawnManager : MonoBehaviour
 
     private void InitializeSpawnPoints()
     {
-        _spawnerPrefab.SetActive(false);
-        _spawnPoints = new List<GameObject>();
+        _spawner.gameObject.SetActive(false);
+        _spawnPoints = new List<SpawnPoint>();
         float baseX = 0;
         float x = 0;
         for (var i = 0; i < _xCount; i++)
@@ -49,10 +63,11 @@ public class SpawnManager : MonoBehaviour
             for (var j = 0; j < _yCount; j++)
             {
                 var location = new Vector2(x, y) + new Vector2(_spawnerXoffset, _spawnerYoffset);
-                GameObject spawner = Instantiate(_spawnerPrefab,location,Quaternion.identity);
-                SpawnPoint scriptReference = spawner.GetComponent<SpawnPoint>();
+                GameObject spawner = Instantiate(_spawner.gameObject,location,Quaternion.identity);
+                SpawnPoint spawnPoint = spawner.GetComponent<SpawnPoint>();
+                spawnPoint.SetEnemy(_enemy.gameObject);
                 // scriptReference.
-                _spawnPoints.Add(spawner);
+                _spawnPoints.Add(spawnPoint);
                 
                 if (j % 2 == 0)
                 {
@@ -78,28 +93,22 @@ public class SpawnManager : MonoBehaviour
         //TODO make better loop
         while (true)
         {
+            if(GameManager.pause) 
+                continue;
+            
             yield return new WaitForSeconds(_spawnRate);
-            var closedSp = _spawnPoints.FindAll((spawner) =>
-            {
-                SpawnPoint scriptReference = spawner.GetComponent<SpawnPoint>();
-                return !scriptReference.IsOpen;
-            });
+            var closedSp = _spawnPoints.FindAll((spawner) => !spawner.IsOpen);
             
             if (closedSp.Count > 0)
             {
                 int randomIndex = Random.Range(0,closedSp.Count);
-                SpawnPoint scriptReference = closedSp[randomIndex].GetComponent<SpawnPoint>();
-                scriptReference.Open();
+                closedSp[randomIndex].Open();
             }
         }
     }
 
     public int OpenPipesCount()
     {
-        return _spawnPoints.FindAll((spawner) =>
-        {
-            SpawnPoint scriptReference = spawner.GetComponent<SpawnPoint>();
-            return scriptReference.IsOpen;
-        }).Count;
+        return _spawnPoints.FindAll((spawner) => spawner.IsOpen).Count;
     }
 }

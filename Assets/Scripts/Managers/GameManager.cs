@@ -1,17 +1,48 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor; // Required for EditorApplication
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool pause = false;
     [SerializeField] private int _maxWaterBeforeFlood = 20000;
-    [SerializeField] private GameObject _spawnManagerPrefab;
-    private GameObject _spawnManager;
+    [SerializeField] private int _maxWaterPerSpawn = 200;
+    private SpawnManager _spawnManager;
+    private GameObject _youLoseScreen;
+    private Player _player;
     private int _currentFlood = 0;
+    
+    public float currentFloodPercent
+    {
+        get => (float)_currentFlood / (float)_maxWaterBeforeFlood;
+    }
+
+    public static void SetPause(bool pauseEntites = true)
+    {
+         pause = pauseEntites;
+    }
     
     void Start()
     {
-        _spawnManager = Instantiate(_spawnManagerPrefab);
+        _spawnManager = gameObject.GetComponentInChildren<SpawnManager>();
+        StartCoroutine(CalculateFlood());
+        _player = FindFirstObjectByType<Player>();
+        GameManager.SetPause(false); // Reset pause
+        
+        var children = gameObject.GetComponentsInChildren<Transform>();
+        foreach (var child in children)
+        {
+            if (child.name == "YouLose")
+            {
+                _youLoseScreen = child.gameObject;
+                _youLoseScreen.SetActive(false);
+                break;
+            }
+        }
+    }
+
+    void Awake()
+    {
         StartCoroutine(CalculateFlood());
     }
 
@@ -28,32 +59,35 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame 1
     void Update()
     {
-        if (_currentFlood >= _maxWaterBeforeFlood)
+        if (_currentFlood >= _maxWaterBeforeFlood ||
+            _player.isDead)
         {
-#if UNITY_EDITOR
-            // Stop Play Mode in the Editor
-            EditorApplication.isPlaying = false;
-#else
-        // Quit the built application
-        Application.Quit();
-#endif
+            GameManager.SetPause();
+            // Show the losing screen
+            _youLoseScreen.SetActive(true);
+            
+            _spawnManager.gameObject.SetActive(false);
         }
     }
 
     private IEnumerator CalculateFlood()
     {
-        SpawnManager scriptReference = _spawnManager.GetComponent<SpawnManager>();
-
         while (true)
         {
             yield return new WaitForSeconds(0.5f);
-            var currentOpenPipes = scriptReference.OpenPipesCount();
-            _currentFlood += currentOpenPipes;
-        }
-    }
+            var currentOpenPipes = _spawnManager.OpenPipesCount();
 
-    public float CurrentFloodPercent
-    {
-        get => (float)_currentFlood / (float)_maxWaterBeforeFlood;
+            var maxFloodAllowed = _maxWaterPerSpawn * currentOpenPipes;
+            
+            if (_currentFlood >= maxFloodAllowed)
+            {
+                if (_currentFlood - currentOpenPipes < maxFloodAllowed)
+                    _currentFlood = maxFloodAllowed;
+                else
+                    _currentFlood -= currentOpenPipes;
+            }
+            else
+                _currentFlood += currentOpenPipes;
+        }
     }
 }

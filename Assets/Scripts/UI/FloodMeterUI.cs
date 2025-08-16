@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarUI : MonoBehaviour
+public class FloodMeterUI : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,9 +14,9 @@ public class HealthBarUI : MonoBehaviour
     {
         
         var image = gameObject.GetComponent<Image>();
-        var player = FindFirstObjectByType<Player>();
+        var manager = FindFirstObjectByType<GameManager>();
 
-        image.fillAmount = player.CurrentHealthPercent();
+        image.fillAmount = manager.currentFloodPercent;
 
     }
 }

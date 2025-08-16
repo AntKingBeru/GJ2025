@@ -5,8 +5,6 @@ public abstract class Entity : MonoBehaviour
 {
     [SerializeField] protected float moveSpeed = 1f;
 
-    [SerializeField] private int _health = 100;
-
     [SerializeField] private int _damage = 10;
 
     [SerializeField] private int _maxHealth = 100;
@@ -19,16 +17,18 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private string _hitAnimationFlag = "default";
     [SerializeField] protected float attackSize = 1.5f;
     [SerializeField] private LayerMask _layerMask;
-
+    [SerializeField] protected float castDistance = 0.5f; // How far the box is cast
+    private int _health;
     protected bool isAttacking = false;
-    protected bool isDead = false;
-    protected float castDistance = 1f; // How far the box is cast
     protected bool isHit = false;
-
-    // Prefab with the dead pipe
-    // On player move on pickup
-    // Picked up on player, multi pipe
-    // When on hole, fix pipe
+    public bool isDead
+    {
+        get => this._health <= 0;
+    }
+    
+    public float currentHealthPercent {
+        get => (float)this._health / (float)this._maxHealth;
+    }
 
     protected enum Direction 
     {
@@ -38,6 +38,7 @@ public abstract class Entity : MonoBehaviour
         Down
     }
     protected Direction lastMoveDirection = Direction.Right;
+    protected Vector2 lastMoveVector;
 
     private SpriteRenderer _spriteRenderer; // For left/right/up/down move
 
@@ -51,12 +52,20 @@ public abstract class Entity : MonoBehaviour
 
         // Getting sprite renderer
         this._spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        this._health = this._maxHealth;
 
+    }
+
+    protected void AddHealth(int amount)
+    {
+        this._health = Mathf.Min(this._maxHealth, this._health + amount);
     }
 
     protected void Move(float horizontal, float vertical) {
         // Create a movement vector based on input
         Vector2 movement = new Vector2(horizontal, vertical);
+        lastMoveVector = movement;
 
         if(this.isAttacking) {
             // animator.SetBool(this.verticalAnimationFlag, false);
@@ -132,7 +141,7 @@ public abstract class Entity : MonoBehaviour
 
     // ================ Helper functions for attack ================
 
-    protected void AttackHorizontalAnimation() {
+    private void AttackHorizontalAnimation() {
         this.ResetMoveAnimation();
         this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
         this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
@@ -185,27 +194,8 @@ public abstract class Entity : MonoBehaviour
     }
 
     private void CheckIfAttackHit() {
-        Vector2 direction = transform.right; // default
-        switch(this.lastMoveDirection) {
-            case Direction.Right:
-                direction = transform.right;
-                break;
-            case Direction.Left:
-                direction = -transform.right;
-                break;
-            case Direction.Up:
-                direction = transform.up;
-                break;
-            case Direction.Down:
-                direction = -transform.up;
-                break;
-            default:
-                direction = transform.right;
-                break;
-        }
-
-        Vector2 boxSize = new Vector2(this.attackSize, this.attackSize);
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, this.castDistance, this._layerMask);
+        Vector2 boxSize = new Vector2(this.castDistance, 0.5f);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, lastMoveVector, this.castDistance, this._layerMask);
 
         if (hit.collider != null) {
             // Getting game object
@@ -213,18 +203,17 @@ public abstract class Entity : MonoBehaviour
 
             if(hitGameObject.CompareTag("Enemy") || hitGameObject.CompareTag("Player")) {
                 Entity entity = hitGameObject.GetComponent<Entity>();
-                entity.TakeDamage(this._damage);
+                if(!entity.isDead) entity.TakeDamage(this._damage);
                 this.DisableAttack();
             } 
         }
     }
 
-    public void TakeDamage(int dmg) {
+    public virtual void TakeDamage(int dmg) {
         this._health -= dmg;
         this.isHit = true;
 
-        if(this._health <= 0) {
-            this.isDead = true;
+        if(this.isDead) {
             this.OnDeath();
         } else {
             this.ChangeAnimationFlag(this._hitAnimationFlag, true);
@@ -236,16 +225,12 @@ public abstract class Entity : MonoBehaviour
         this.isHit = false;
     }
 
-    // Changing animcation flag if not default
-    protected void ChangeAnimationFlag(string flagName, bool flag) {
+    // Changing animation flag if not default
+    protected void ChangeAnimationFlag(string flagName, bool on) {
         if(flagName != "default") {
-            this._animator.SetBool(flagName, flag);
+            this._animator.SetBool(flagName, on);
         }
     }
-
-    public float CurrentHealthPercent() {
-        return (float)this._health / (float)this._maxHealth;
-    }
-
+    
     protected abstract void OnDeath();
 }
