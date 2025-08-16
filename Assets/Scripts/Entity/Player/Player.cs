@@ -115,6 +115,7 @@ public class Player : Entity
             this.ChangeAnimationFlag(this._fixAnimationFlag, false);
             this._isFixing = false;
         }
+
         DropPipe();
     }
 
