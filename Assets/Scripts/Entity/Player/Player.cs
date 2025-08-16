@@ -43,6 +43,7 @@ public class Player : Entity
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            AudioManager.instance.PlaySound("Test");
             base.Attack();
         }
     }

@@ -31,6 +31,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void PlaySound(string soundName)
     {
         foreach (Sound s in sounds)

@@ -18,6 +18,9 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] protected float attackSize = 1.5f;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] protected float castDistance = 0.5f; // How far the box is cast
+    [SerializeField] protected string attackSound;
+    [SerializeField] protected string hitSound;
+    
     private int _health;
     protected bool isAttacking = false;
     protected bool isHit = false;
@@ -38,7 +41,6 @@ public abstract class Entity : MonoBehaviour
         Down
     }
     protected Direction lastMoveDirection = Direction.Right;
-    protected Vector2 lastMoveVector;
 
     private SpriteRenderer _spriteRenderer; // For left/right/up/down move
 
@@ -65,7 +67,6 @@ public abstract class Entity : MonoBehaviour
     protected void Move(float horizontal, float vertical) {
         // Create a movement vector based on input
         Vector2 movement = new Vector2(horizontal, vertical);
-        lastMoveVector = movement;
 
         if(this.isAttacking) {
             // animator.SetBool(this.verticalAnimationFlag, false);
@@ -172,7 +173,7 @@ public abstract class Entity : MonoBehaviour
     // Getting animation name becuase be are generic, yay
     protected void Attack() {
         this.isAttacking = true;
-
+        AudioManager.instance.PlaySound(this.attackSound);
         switch (this.lastMoveDirection)
         {
             case Direction.Right:
@@ -244,7 +245,8 @@ public abstract class Entity : MonoBehaviour
     public virtual void TakeDamage(int dmg) {
         this._health -= dmg;
         this.isHit = true;
-
+        
+        AudioManager.instance.PlaySound(this.hitSound);
         if(this.isDead) {
             this.OnDeath();
         } else {

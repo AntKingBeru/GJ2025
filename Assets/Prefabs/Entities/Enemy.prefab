@@ -118,6 +118,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   castDistance: 1
+  attackSound: EnemyAttack
+  hitSound: EnemyHit
   _deadMePrefab: {fileID: 3845665314980062014, guid: 8f14e382d54d36d4aa647ce6b4f2ccb3, type: 3}
   _attackDistanceTrigger: 1.2
 --- !u!95 &4571041511817173783

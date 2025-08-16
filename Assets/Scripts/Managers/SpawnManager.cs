@@ -17,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        AudioManager.instance.PlaySound("BackgroundMusic");
         _spawner = gameObject.GetComponentInChildren<SpawnPoint>();
         _spawner.gameObject.SetActive(false);
         _enemy = gameObject.GetComponentInChildren<Enemy>();

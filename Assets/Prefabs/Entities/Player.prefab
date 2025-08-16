@@ -118,6 +118,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   castDistance: 1
+  attackSound: PlayerAttack
+  hitSound: PlayerHit
   _deathAnimationFlag: Death
 --- !u!95 &3492114534600934685
 Animator:
