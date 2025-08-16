@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4845332848912798607}
   - component: {fileID: 4571041511817173783}
   - component: {fileID: 8151688812819335831}
+  - component: {fileID: 1088638920834854397}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -112,11 +113,13 @@ MonoBehaviour:
   _attackUpAnimationFlag: Attack
   _attackDownAnimationFlag: Attack
   _hitAnimationFlag: Hit
-  attackSize: 1.5
+  attackSize: 3.5
   _layerMask:
     serializedVersion: 2
     m_Bits: 1
+  castDistance: 1
   _deadMePrefab: {fileID: 3845665314980062014, guid: 8f14e382d54d36d4aa647ce6b4f2ccb3, type: 3}
+  _attackDistanceTrigger: 1.2
 --- !u!95 &4571041511817173783
 Animator:
   serializedVersion: 7
@@ -169,7 +172,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -185,3 +188,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.6339418, y: 0.84512913}
   m_EdgeRadius: 0
+--- !u!50 &1088638920834854397
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499949128416203045}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

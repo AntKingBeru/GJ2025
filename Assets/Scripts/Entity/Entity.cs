@@ -173,7 +173,8 @@ public abstract class Entity : MonoBehaviour
     protected void Attack() {
         this.isAttacking = true;
 
-        switch(this.lastMoveDirection) {
+        switch (this.lastMoveDirection)
+        {
             case Direction.Right:
                 this.AttackHorizontalAnimation();
                 break;
@@ -190,17 +191,43 @@ public abstract class Entity : MonoBehaviour
                 this.AttackHorizontalAnimation();
                 break;
         }
-       
     }
 
     private void CheckIfAttackHit() {
-        Vector2 boxSize = new Vector2(this.castDistance, 0.5f);
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, lastMoveVector, this.castDistance, this._layerMask);
+        Vector2 direction = transform.right; // Assuming the box should move forward based on the object's right direction
+        switch(this.lastMoveDirection) {
+            case Direction.Right:
+                direction = transform.right;
+                break;
+            case Direction.Left:
+                direction = -transform.right;
+                break;
+            case Direction.Up:
+                direction = transform.up;
+                break;
+            case Direction.Down:
+                direction = -transform.up;
+                break;
+            default:
+                direction = transform.right;
+                break;
+        }
+        
+        Vector2 boxSize = new Vector2(this.attackSize, this.attackSize);
+        Vector2 boxOffset = new Vector2(this.castDistance, 0);
+        float maxDistance = 1f; // Maximum distance to cast the box
+        
+        // Calculate the box's position and direction
+        Vector2 boxPosition = (Vector2)transform.position + boxOffset;
 
+        // Perform the box cast
+        RaycastHit2D hit = Physics2D.BoxCast(boxPosition, boxSize, 0f, direction, maxDistance, this._layerMask);
+
+        // Check if a collider was hit
         if (hit.collider != null) {
             // Getting game object
             GameObject hitGameObject = hit.collider.gameObject;
-
+        
             if(hitGameObject.CompareTag("Enemy") || hitGameObject.CompareTag("Player")) {
                 Entity entity = hitGameObject.GetComponent<Entity>();
                 if(!entity.isDead) entity.TakeDamage(this._damage);
