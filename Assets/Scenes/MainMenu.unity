@@ -757,30 +757,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4730751298378564517, guid: 5b28f8d603a61284c8d2466f268c2c16, type: 3}
-      propertyPath: sounds.Array.data[0].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4730751298378564517, guid: 5b28f8d603a61284c8d2466f268c2c16, type: 3}
-      propertyPath: sounds.Array.data[1].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4730751298378564517, guid: 5b28f8d603a61284c8d2466f268c2c16, type: 3}
-      propertyPath: sounds.Array.data[2].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4730751298378564517, guid: 5b28f8d603a61284c8d2466f268c2c16, type: 3}
-      propertyPath: sounds.Array.data[3].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4730751298378564517, guid: 5b28f8d603a61284c8d2466f268c2c16, type: 3}
-      propertyPath: sounds.Array.data[4].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4730751298378564517, guid: 5b28f8d603a61284c8d2466f268c2c16, type: 3}
-      propertyPath: sounds.Array.data[4].volume
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1232,22 +1208,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4578607233045388523, guid: 4e8f44a6256464368add0fc7541e7e30, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 799.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4578607233045388523, guid: 4e8f44a6256464368add0fc7541e7e30, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 492.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 4578607233045388523, guid: 4e8f44a6256464368add0fc7541e7e30, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.37876
-      objectReference: {fileID: 0}
-    - target: {fileID: 4578607233045388523, guid: 4e8f44a6256464368add0fc7541e7e30, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.00026608
-      objectReference: {fileID: 0}
     - target: {fileID: 5336790626476323212, guid: 4e8f44a6256464368add0fc7541e7e30, type: 3}
       propertyPath: m_Name
       value: SceneFader

@@ -57,6 +57,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
+  - name: PlayerFix
+    clip: {fileID: 8300000, guid: a477bd933e81fb84591d53afeebb4904, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
   - name: EnemyAttack
     clip: {fileID: 8300000, guid: 81fe904157b90e741a37809a7e8a75f1, type: 3}
     volume: 1
@@ -71,7 +77,13 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   - name: BackgroundMusic
     clip: {fileID: 8300000, guid: 9605890e815c71e4b9e0fe192209375a, type: 3}
-    volume: 0.5
+    volume: 0.1
     pitch: 1
     loop: 1
+    audioSource: {fileID: 0}
+  - name: Water
+    clip: {fileID: 8300000, guid: e4d47ce7330ea474bb7dd35b2d1b3a0b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
     audioSource: {fileID: 0}

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private List<Sound> _sounds;
+    [SerializeField] private List<Sound> sounds;
     public static AudioManager instance;
-    
+
+
     void Awake()
     {
         if (instance == null)
@@ -19,7 +20,15 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        UpdateVolume();
+        foreach (Sound s in sounds)
+        {
+            s.audioSource = gameObject.AddComponent<AudioSource>();
+            s.audioSource.clip = s.clip;
+            
+            s.audioSource.volume = s.volume;
+            s.audioSource.pitch = s.pitch;
+            s.audioSource.loop = s.loop;
+        }
     }
 
     void Start()
@@ -27,40 +36,25 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void UpdateVolume()
+    public void PlaySound(string soundName, float duration = 0f)
     {
-        foreach (Sound s in _sounds)
+        foreach (Sound s in sounds)
         {
-            s.audioSource = gameObject.AddComponent<AudioSource>();
-            s.audioSource.clip = s.clip;
-            
-            float multiplier = 0;
-            if (s.name == "BackgroundMusic")
-                multiplier = SettingsManager.musicVolume;
-            else
-                multiplier = SettingsManager.sfxVolume;
-            
-            s.audioSource.volume = s.volume * SettingsManager.masterVolume * multiplier;
-            s.audioSource.pitch = s.pitch;
-            s.audioSource.loop = s.loop;
-
-            if (s.audioSource.isPlaying)
+            if (s.name == soundName)
             {
-                s.audioSource.Stop();
+                if (duration > 0f)
+                    s.audioSource.time = s.audioSource.clip.length - duration;
                 s.audioSource.Play();
             }
         }
     }
-
-    public void PlaySound(string soundName)
+    
+    public void StopSound(string soundName)
     {
-        foreach (Sound s in _sounds)
+        foreach (Sound s in sounds)
         {
             if (s.name == soundName)
-            {
-                s.audioSource.Play();
-                break;
-            }
+                s.audioSource.Stop();
         }
     }
 }

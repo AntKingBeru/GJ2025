@@ -11,7 +11,17 @@ public class GameManager : MonoBehaviour
     private GameObject _youLoseScreen;
     private Player _player;
     private int _currentFlood = 0;
+
+    enum WaterLevel
+    {
+        Zero, // 0 - 0.1
+        First, // 0.1 - 0.3
+        Second, // 0.3 - 0.5
+        Third, // 0.5 - 0.8
+        Forth // 0.8 - 1
+    }
     
+    private WaterLevel _currentWaterLevel = WaterLevel.Zero;
     public float currentFloodPercent
     {
         get => (float)_currentFlood / (float)_maxWaterBeforeFlood;
@@ -67,6 +77,28 @@ public class GameManager : MonoBehaviour
             _youLoseScreen.SetActive(true);
             
             _spawnManager.gameObject.SetActive(false);
+        }
+        
+        // Checking current flood to activate sound
+        
+        // Getting current water level
+        WaterLevel waterLevel;
+        if (_currentFlood >= 0f && _currentFlood < 0.1f)
+            waterLevel = WaterLevel.Zero;
+        else if (_currentFlood >= 0.1f && _currentFlood < 0.3f)
+            waterLevel = WaterLevel.First;
+        else if (_currentFlood >= 0.3f && _currentFlood < 0.5f)
+            waterLevel = WaterLevel.Second;
+        else if (_currentFlood >= 0.5f && _currentFlood < 0.8f)
+            waterLevel = WaterLevel.Third;
+        else
+            waterLevel = WaterLevel.Forth;
+        
+        // Activating water sound on water level change
+        if (this._currentWaterLevel != waterLevel)
+        {
+            this._currentWaterLevel = waterLevel;
+            AudioManager.instance.PlaySound("Water", 1f);
         }
     }
 

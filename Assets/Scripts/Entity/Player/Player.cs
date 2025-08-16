@@ -41,9 +41,8 @@ public class Player : Entity
 
         base.Move(horizontalInput, verticalInput);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !this.isAttacking) //to avoid multi attacks
         {
-            AudioManager.instance.PlaySound("Test");
             base.Attack();
         }
     }
@@ -56,9 +55,11 @@ public class Player : Entity
         }
         else if (other.CompareTag("SpawnPoint") && _carriedObject != null)
         {
+            // Fixing
             this._isFixing = true;
             this._currentFix = other.gameObject;
             this.ChangeAnimationFlag(this._fixAnimationFlag, true);
+            AudioManager.instance.PlaySound("PlayerFix", 1f);
         }
     }
     
