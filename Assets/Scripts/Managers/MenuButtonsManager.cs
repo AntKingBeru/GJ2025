@@ -25,6 +25,8 @@ public class MenuManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        // Could not make Double onclick work
+        AudioManager.instance.StopSound("BackgroundMusic"); 
         SceneFader.instance.LoadSceneWithFade(0);
     }
 
