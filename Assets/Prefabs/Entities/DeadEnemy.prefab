@@ -78,9 +78,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1838729235
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: 1527434193
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 4385992469739610806, guid: 86ea0f4e8674c7947b1dda435c246475, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -210,6 +210,10 @@ PrefabInstance:
     - target: {fileID: 6975969750552439457, guid: ae76cf1c2c34440af9571e686ae717eb, type: 3}
       propertyPath: m_Name
       value: DeathTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197840621342116923, guid: ae76cf1c2c34440af9571e686ae717eb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1838729235
       objectReference: {fileID: 0}
     - target: {fileID: 7705521702928477942, guid: ae76cf1c2c34440af9571e686ae717eb, type: 3}
       propertyPath: m_Pivot.x
