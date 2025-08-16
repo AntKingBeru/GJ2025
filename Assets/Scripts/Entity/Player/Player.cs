@@ -71,6 +71,7 @@ public class Player : Entity
             // For simplicity, let's assume 'objectToPickUp' is already determined
             if (objectToPickUp != null)
             {
+                objectToPickUp.GetComponent<DeadEnemy>().isCarried = true;
                 _carriedObject = objectToPickUp;
                 _carriedObject.transform.SetParent(transform); // My position
                 _carriedObject.transform.localPosition = new Vector3(0f, 0.5f, 0f); // Adjust as needed
@@ -89,6 +90,7 @@ public class Player : Entity
             Rigidbody2D rb = _carriedObject.GetComponent<Rigidbody2D>();
             if (rb != null) rb.bodyType = RigidbodyType2D.Kinematic;
             _carriedObject.transform.SetParent(null);
+            _carriedObject.GetComponent<DeadEnemy>().isCarried = false;
             _carriedObject = null;
         }
 

@@ -94,18 +94,27 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator StartSpawning()
     {
-        //TODO make better loop
+        yield return new WaitForSeconds(4f);
+        var closedSp = _spawnPoints.FindAll((spawner) => !spawner.IsOpen);
+            
+        if (closedSp.Count > 0)
+        {
+            int randomIndex = Random.Range(0,closedSp.Count);
+            closedSp[randomIndex].Open();
+        }
+        
         while (true)
         {
+            yield return new WaitForSeconds(_spawnRate);
+            
             if(GameManager.pause) 
                 continue;
             
-            yield return new WaitForSeconds(_spawnRate);
-            var closedSp = _spawnPoints.FindAll((spawner) => !spawner.IsOpen);
+            closedSp = _spawnPoints.FindAll((spawner) => !spawner.IsOpen);
             
             if (closedSp.Count > 0)
             {
-                int randomIndex = Random.Range(0,closedSp.Count);
+                var randomIndex = Random.Range(0,closedSp.Count);
                 closedSp[randomIndex].Open();
             }
         }

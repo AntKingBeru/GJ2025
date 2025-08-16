@@ -24,18 +24,22 @@ public class DeathTimer : MonoBehaviour
     
     private IEnumerator Timer()
     {
+        var deadEnemy = gameObject.GetComponentInParent<DeadEnemy>();
         var countdownTime = _seconds;
         //TODO make better loop
         while (countdownTime > 0)
         {
             yield return new WaitForSeconds(1f); // Wait for 1 second
+            
+            if(deadEnemy.isCarried)
+                continue;
+            
             countdownTime--; // Decrement the timer
             
             var image = gameObject.GetComponent<Image>();
             image.fillAmount = (float) countdownTime / (float)_seconds;
         }
 
-        var deadEnemy = gameObject.GetComponentInParent<DeadEnemy>();
         deadEnemy.DeathTimerFinished();
     }
 }
