@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : Entity
@@ -10,6 +13,21 @@ public class Player : Entity
         
     private GameObject _carriedObject;
     private GameObject _currentFix;
+
+    void Start()
+    {
+        StartCoroutine(CheckForAttack());
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 
 
     // Update is called once per frame
@@ -40,10 +58,21 @@ public class Player : Entity
         else if (verticalInput < -0.01) verticalInput = -1;
 
         base.Move(horizontalInput, verticalInput);
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !this.isAttacking) //to avoid multi attacks
+    IEnumerator CheckForAttack()
+    {
+        while (!this.isDead)
         {
-            base.Attack();
+            if (Input.GetKeyDown(KeyCode.Space) && !this.isAttacking) //to avoid multi attacks
+            {
+                base.Attack();
+                yield return new WaitForSeconds(0.8f);
+            }
+            else
+            {
+                yield return null; // Wait for next frame
+            }
         }
     }
     
