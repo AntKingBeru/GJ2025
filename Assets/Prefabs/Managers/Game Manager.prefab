@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 1759239450406855566}
   - component: {fileID: 1353642253084058901}
   - component: {fileID: 5867861885554011261}
+  - component: {fileID: 8999836415777608688}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: SpawnPoint
@@ -874,6 +875,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8325945, y: 0.720991}
   m_EdgeRadius: 0
+--- !u!95 &8999836415777608688
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6027035819784144203}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eeba9ef8305cd144aa3b9b4c99c2c991, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6568595899669037787
 GameObject:
   m_ObjectHideFlags: 0

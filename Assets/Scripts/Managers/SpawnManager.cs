@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _spawnerYoffset;
     private SpawnPoint _spawner;
     private Enemy _enemy;
+    private GameManager _gameManager;
     
     private List<SpawnPoint> _spawnPoints;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,6 +22,8 @@ public class SpawnManager : MonoBehaviour
         _spawner.gameObject.SetActive(false);
         _enemy = gameObject.GetComponentInChildren<Enemy>();
         _enemy.gameObject.SetActive(false);
+        _gameManager = gameObject.GetComponentInParent<GameManager>();
+        
         InitializeSpawnPoints();
     }
 
@@ -65,7 +68,7 @@ public class SpawnManager : MonoBehaviour
                 var location = new Vector2(x, y) + new Vector2(_spawnerXoffset, _spawnerYoffset);
                 GameObject spawner = Instantiate(_spawner.gameObject,location,Quaternion.identity);
                 SpawnPoint spawnPoint = spawner.GetComponent<SpawnPoint>();
-                spawnPoint.SetEnemy(_enemy.gameObject);
+                spawnPoint.SetParameters(_enemy.gameObject,_gameManager);
                 // scriptReference.
                 _spawnPoints.Add(spawnPoint);
                 

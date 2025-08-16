@@ -8,12 +8,28 @@ public class SpawnPoint : MonoBehaviour
 	private GameObject _enemy;
 	[SerializeField] private float _spawnRate;
 	[SerializeField] private float _spawnChance = 30f;
+    private GameManager _gameManager;
+        
+    // For all animations
+    protected Animator _animator;
 
-    public void SetEnemy(GameObject enemy)
+    public void SetParameters(GameObject enemy,GameManager gameManager)
     {
         _enemy = enemy;
+        _gameManager = gameManager;
     }
 
+    void Awake()
+    {
+        // Getting animator
+        this._animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        this._animator.SetFloat("Percentage", _gameManager.currentFloodPercent);
+    }
+    
     void OnDisable()
     {
         StopAllCoroutines();
