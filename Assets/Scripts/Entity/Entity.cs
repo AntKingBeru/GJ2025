@@ -17,9 +17,9 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private string _hitAnimationFlag = "default";
     [SerializeField] protected float attackSize = 1.5f;
     [SerializeField] private LayerMask _layerMask;
+    [SerializeField] protected float castDistance = 0.5f; // How far the box is cast
     private int _health;
     protected bool isAttacking = false;
-    protected float castDistance = 0.5f; // How far the box is cast
     protected bool isHit = false;
     public bool isDead
     {
@@ -192,19 +192,19 @@ public abstract class Entity : MonoBehaviour
         Vector2 direction = transform.right; // default
         switch(this.lastMoveDirection) {
             case Direction.Right:
-                direction = transform.right;
+                direction = new Vector2(this.castDistance, 0f);
                 break;
             case Direction.Left:
-                direction = -transform.right;
+                direction = new Vector2(this.castDistance, 0f);
                 break;
             case Direction.Up:
-                direction = transform.up;
+                direction = new Vector2(0f, this.castDistance);
                 break;
             case Direction.Down:
-                direction = -transform.up;
+                direction = new Vector2(0f, this.castDistance);
                 break;
             default:
-                direction = transform.right;
+                direction = new Vector2(this.castDistance, 0f);
                 break;
         }
         

@@ -314,7 +314,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: attackSize
-      value: 2
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
+      propertyPath: castDistance
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
