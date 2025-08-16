@@ -100,6 +100,7 @@ public class Player : Entity
         {
             SpawnPoint sp = _currentFix.GetComponent<SpawnPoint>();
             sp.Close();
+            this.AddHealth(10);
             Destroy(_carriedObject);
             _carriedObject = null;
         } 

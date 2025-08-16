@@ -64,7 +64,7 @@ public class Enemy : Entity
     private void CheckAttack(){
         float distance = Vector3.Distance(transform.position, this._target.position);
         
-        if(distance <= this.castDistance) { //Added because of body size
+        if(distance <= this.castDistance) {
             if(!this._wasInRadius) this.Attack();
             this._wasInRadius = true;
         } else this._wasInRadius = false;

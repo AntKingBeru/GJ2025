@@ -38,6 +38,7 @@ public abstract class Entity : MonoBehaviour
         Down
     }
     protected Direction lastMoveDirection = Direction.Right;
+    protected Vector2 lastMoveVector;
 
     private SpriteRenderer _spriteRenderer; // For left/right/up/down move
 
@@ -56,9 +57,15 @@ public abstract class Entity : MonoBehaviour
 
     }
 
+    protected void AddHealth(int amount)
+    {
+        this._health = Mathf.Min(this._maxHealth, this._health + amount);
+    }
+
     protected void Move(float horizontal, float vertical) {
         // Create a movement vector based on input
         Vector2 movement = new Vector2(horizontal, vertical);
+        lastMoveVector = movement;
 
         if(this.isAttacking) {
             // animator.SetBool(this.verticalAnimationFlag, false);
@@ -134,7 +141,7 @@ public abstract class Entity : MonoBehaviour
 
     // ================ Helper functions for attack ================
 
-    protected void AttackHorizontalAnimation() {
+    private void AttackHorizontalAnimation() {
         this.ResetMoveAnimation();
         this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
         this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
@@ -187,27 +194,8 @@ public abstract class Entity : MonoBehaviour
     }
 
     private void CheckIfAttackHit() {
-        Vector2 direction = transform.right; // default
-        switch(this.lastMoveDirection) {
-            case Direction.Right:
-                direction = new Vector2(this.castDistance, 0f);
-                break;
-            case Direction.Left:
-                direction = new Vector2(this.castDistance, 0f);
-                break;
-            case Direction.Up:
-                direction = new Vector2(0f, this.castDistance);
-                break;
-            case Direction.Down:
-                direction = new Vector2(0f, this.castDistance);
-                break;
-            default:
-                direction = new Vector2(this.castDistance, 0f);
-                break;
-        }
-        
-        Vector2 boxSize = new Vector2(this.attackSize, this.attackSize);
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, this.castDistance, this._layerMask);
+        Vector2 boxSize = new Vector2(this.castDistance, 0.5f);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, lastMoveVector, this.castDistance, this._layerMask);
 
         if (hit.collider != null) {
             // Getting game object
