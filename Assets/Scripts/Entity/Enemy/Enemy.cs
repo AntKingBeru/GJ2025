@@ -15,7 +15,7 @@ public class Enemy : Entity
     // Update is called once per frame
     void Update()
     {
-        if (Entity.pause)
+        if (GameManager.pause)
         {
             this.ResetMoveAnimation();
             return;

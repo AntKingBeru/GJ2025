@@ -5,20 +5,14 @@ using System.Collections.Generic;
 public class SpawnPoint : MonoBehaviour
 {
     private bool _open = false;
-	[SerializeField] private GameObject _enemy;
+	private GameObject _enemy;
 	[SerializeField] private float _spawnRate;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
 
+    public void SetEnemy(GameObject enemy)
+    {
+        _enemy = enemy;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     void OnDisable()
     {
         StopAllCoroutines();
@@ -39,7 +33,7 @@ public class SpawnPoint : MonoBehaviour
         _open = true;
         // Instantiate your object at spawnPosition
 		gameObject.SetActive(true);
-        Instantiate(_enemy,gameObject.transform.position,gameObject.transform.rotation);
+        Instantiate(_enemy,gameObject.transform.position,gameObject.transform.rotation).SetActive(true);
         StartCoroutine(StartSpawning());
     }
 
@@ -54,7 +48,7 @@ public class SpawnPoint : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(_spawnRate);
-            Instantiate(_enemy,gameObject.transform.position,gameObject.transform.rotation);
+            Instantiate(_enemy,gameObject.transform.position,gameObject.transform.rotation).SetActive(true);
         }
 
     }

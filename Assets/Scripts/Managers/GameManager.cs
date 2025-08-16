@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool pause = false;
     [SerializeField] private int _maxWaterBeforeFlood = 20000;
     [SerializeField] private int _maxWaterPerSpawn = 200;
-    [SerializeField] private GameObject _spawnManagerPrefab;
-    private GameObject _spawnManager;
+    private SpawnManager _spawnManager;
     private GameObject _youLoseScreen;
     private Player _player;
     private int _currentFlood = 0;
@@ -16,13 +16,18 @@ public class GameManager : MonoBehaviour
     {
         get => (float)_currentFlood / (float)_maxWaterBeforeFlood;
     }
+
+    public static void SetPause(bool pauseEntites = true)
+    {
+         pause = pauseEntites;
+    }
     
     void Start()
     {
-        _spawnManager = Instantiate(_spawnManagerPrefab);
+        _spawnManager = gameObject.GetComponentInChildren<SpawnManager>();
         StartCoroutine(CalculateFlood());
         _player = FindFirstObjectByType<Player>();
-        Entity.pause = false; // Reset pause
+        GameManager.SetPause(false); // Reset pause
         
         var children = gameObject.GetComponentsInChildren<Transform>();
         foreach (var child in children)
@@ -34,6 +39,11 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    void Awake()
+    {
+        StartCoroutine(CalculateFlood());
     }
 
     void OnDisable()
@@ -52,20 +62,20 @@ public class GameManager : MonoBehaviour
         if (_currentFlood >= _maxWaterBeforeFlood ||
             _player.isDead)
         {
-            Entity.pause = true;
+            GameManager.SetPause();
             // Show the losing screen
             _youLoseScreen.SetActive(true);
+            
+            _spawnManager.gameObject.SetActive(false);
         }
     }
 
     private IEnumerator CalculateFlood()
     {
-        SpawnManager scriptReference = _spawnManager.GetComponent<SpawnManager>();
-
         while (true)
         {
             yield return new WaitForSeconds(0.5f);
-            var currentOpenPipes = scriptReference.OpenPipesCount();
+            var currentOpenPipes = _spawnManager.OpenPipesCount();
 
             var maxFloodAllowed = _maxWaterPerSpawn * currentOpenPipes;
             
