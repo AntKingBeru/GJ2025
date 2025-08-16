@@ -32,4 +32,9 @@ public class MenuManager : MonoBehaviour
     {
         SceneFader.instance.LoadSceneWithFade(SceneManager.GetActiveScene().buildIndex);
     }
+    
+    public void GoToSettings()
+    {
+        SceneFader.instance.LoadSceneWithFade(3);
+    }
 }

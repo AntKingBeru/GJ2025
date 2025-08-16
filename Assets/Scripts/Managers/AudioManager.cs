@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private List<Sound> sounds;
+    [SerializeField] private List<Sound> _sounds;
     public static AudioManager instance;
-
-
+    
     void Awake()
     {
         if (instance == null)
@@ -20,15 +19,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        foreach (Sound s in sounds)
-        {
-            s.audioSource = gameObject.AddComponent<AudioSource>();
-            s.audioSource.clip = s.clip;
-            
-            s.audioSource.volume = s.volume;
-            s.audioSource.pitch = s.pitch;
-            s.audioSource.loop = s.loop;
-        }
+        UpdateVolume();
     }
 
     void Start()
@@ -36,13 +27,39 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void UpdateVolume()
+    {
+        foreach (Sound s in _sounds)
+        {
+            s.audioSource = gameObject.AddComponent<AudioSource>();
+            s.audioSource.clip = s.clip;
+            
+            float multiplier = 0;
+            if (s.name == "BackgroundMusic")
+                multiplier = SettingsManager.musicVolume;
+            else
+                multiplier = SettingsManager.sfxVolume;
+            
+            s.audioSource.volume = s.volume * SettingsManager.masterVolume * multiplier;
+            s.audioSource.pitch = s.pitch;
+            s.audioSource.loop = s.loop;
+
+            if (s.audioSource.isPlaying)
+            {
+                s.audioSource.Stop();
+                s.audioSource.Play();
+            }
+        }
+    }
+
     public void PlaySound(string soundName)
     {
-        foreach (Sound s in sounds)
+        foreach (Sound s in _sounds)
         {
             if (s.name == soundName)
             {
                 s.audioSource.Play();
+                break;
             }
         }
     }
