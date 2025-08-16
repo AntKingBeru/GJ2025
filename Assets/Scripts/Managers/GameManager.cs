@@ -51,4 +51,9 @@ public class GameManager : MonoBehaviour
             _currentFlood += currentOpenPipes;
         }
     }
+
+    public float CurrentFloodPercent
+    {
+        get => (float)_currentFlood / (float)_maxWaterBeforeFlood;
+    }
 }

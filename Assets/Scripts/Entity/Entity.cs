@@ -3,46 +3,54 @@ using System.Collections;
 
 public abstract class Entity : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 1f;
+    [SerializeField] protected float moveSpeed = 1f;
 
     [SerializeField] private int _health = 100;
 
     [SerializeField] private int _damage = 10;
 
-    // [SerializeField] protected string idleAnimationFlag = "idle";
-    [SerializeField] private string _horizontalAnimationFlag = "horizontal";
-    [SerializeField] private string _upAnimationFlag = "up";
-    [SerializeField] private string _downAnimationFlag = "vertical";
-    [SerializeField] private string _attackHorizontalAnimationFlag = "attack";
-    [SerializeField] private string _attackUpAnimationFlag = "attack";
-    [SerializeField] private string _attackDownAnimationFlag = "attack";
-    [SerializeField] private string _hitAnimationFlag = "attack";
-    [SerializeField] private float _attackSize = 1.5f;
+    [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private string _horizontalAnimationFlag = "default";
+    [SerializeField] private string _upAnimationFlag = "default";
+    [SerializeField] private string _downAnimationFlag = "default";
+    [SerializeField] private string _attackHorizontalAnimationFlag = "default";
+    [SerializeField] private string _attackUpAnimationFlag = "default";
+    [SerializeField] private string _attackDownAnimationFlag = "default";
+    [SerializeField] private string _hitAnimationFlag = "default";
+    [SerializeField] protected float attackSize = 1.5f;
     [SerializeField] private LayerMask _layerMask;
 
-    private bool _isAttacking = false;
+    protected bool isAttacking = false;
+    protected bool isDead = false;
+    protected float castDistance = 1f; // How far the box is cast
+    protected bool isHit = false;
 
-    enum Direction 
+    // Prefab with the dead pipe
+    // On player move on pickup
+    // Picked up on player, multi pipe
+    // When on hole, fix pipe
+
+    protected enum Direction 
     {
         Right,
         Left,
         Up,
         Down
     }
-    private Direction _lastMoveDirection = Direction.Right;
+    protected Direction lastMoveDirection = Direction.Right;
 
     private SpriteRenderer _spriteRenderer; // For left/right/up/down move
 
     // For all animations
-    private Animator _animator;
+    protected Animator _animator;
 
     void Awake()
     {
         // Getting animator
-        _animator = GetComponent<Animator>();
+        this._animator = GetComponent<Animator>();
 
         // Getting sprite renderer
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        this._spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -50,172 +58,193 @@ public abstract class Entity : MonoBehaviour
         // Create a movement vector based on input
         Vector2 movement = new Vector2(horizontal, vertical);
 
-        if(this._isAttacking) {
+        if(this.isAttacking) {
             // animator.SetBool(this.verticalAnimationFlag, false);
-            this._animator.SetBool(this._horizontalAnimationFlag, false);
+            this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
             return;
         }
 
-        // Calcuate animation to active
-
         if (horizontal > 0)  {
-            this._lastMoveDirection = Direction.Right;
+            this.lastMoveDirection = Direction.Right;
             this.MoveRightAnimation();
         }
         else if (horizontal < 0) {
-            this._lastMoveDirection = Direction.Left;
+            this.lastMoveDirection = Direction.Left;
             this.MoveLeftAnimation();
         }
         else {
-            this._animator.SetBool(this._horizontalAnimationFlag, false);
+            this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
         }
 
         if (vertical > 0) {
-            this._lastMoveDirection = Direction.Up;
+            this.lastMoveDirection = Direction.Up;
             this.MoveUpAnimation();
         }
         else if (vertical < 0) {
-            this._lastMoveDirection = Direction.Down;
+            this.lastMoveDirection = Direction.Down;
             this.MoveDownAnimation();
         }
         else {
-            this._animator.SetBool(this._upAnimationFlag, false);
-            this._animator.SetBool(this._downAnimationFlag, false);
+            this.ChangeAnimationFlag(this._upAnimationFlag, false);
+            this.ChangeAnimationFlag(this._downAnimationFlag, false);
         }
 
         // Normalize the vector to prevent faster diagonal movement
-        if (movement.magnitude > 1f)
-        {
-            movement.Normalize();
-        }
+        if (movement.magnitude > 1f) movement.Normalize();
 
         // Apply movement scaled by speed and time.deltaTime for frame-rate independence
-        transform.Translate(movement * _moveSpeed * Time.deltaTime);
+        transform.Translate(movement * this.moveSpeed * Time.deltaTime);
     }
     
     // ================ Helper function for all movement start ================
 
-    private void ResetMoveAnimation() {
-        this._animator.SetBool(this._horizontalAnimationFlag, false);
-        this._animator.SetBool(this._upAnimationFlag, false);
-        this._animator.SetBool(this._downAnimationFlag, false);
-        // this._spriteRenderer.flipX = false; // Flip orientation
+    protected void ResetMoveAnimation() {
+        this.ChangeAnimationFlag(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
     }
 
-    private void MoveRightAnimation() {
-        this._animator.SetBool(this._horizontalAnimationFlag, true);
-        this._animator.SetBool(this._upAnimationFlag, false);
-        this._animator.SetBool(this._downAnimationFlag, false);
-        this._spriteRenderer.flipX = false; // Flip orientation
+    protected void MoveRightAnimation() {
+        this.ChangeAnimationFlag(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
+        this._spriteRenderer.flipX = false; // Regular orientation
     }
 
-    private void MoveLeftAnimation() {
-        this._animator.SetBool(this._horizontalAnimationFlag, true);
-        this._animator.SetBool(this._upAnimationFlag, false);
-        this._animator.SetBool(this._downAnimationFlag, false);
+    protected void MoveLeftAnimation() {
+        this.ChangeAnimationFlag(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, true);
         this._spriteRenderer.flipX = true; // Flip orientation
     }
 
     private void MoveUpAnimation() {
-        this._animator.SetBool(this._upAnimationFlag, true);
-        this._animator.SetBool(this._horizontalAnimationFlag, false);
-        this._animator.SetBool(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, false);
+        this.ChangeAnimationFlag(this._upAnimationFlag, true);
     }
 
     private void MoveDownAnimation() {
-        this._animator.SetBool(this._downAnimationFlag, true);
-        this._animator.SetBool(this._horizontalAnimationFlag, false);
-        this._animator.SetBool(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._horizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._upAnimationFlag, false);
+        this.ChangeAnimationFlag(this._downAnimationFlag, true);
     }
 
     // ================ Helper functions for attack ================
 
-    private void AttackHorizontalAnimation() {
+    protected void AttackHorizontalAnimation() {
         this.ResetMoveAnimation();
-        this._animator.SetBool(this._attackHorizontalAnimationFlag, true);
-        this._animator.SetBool(this._attackUpAnimationFlag, false);
-        this._animator.SetBool(this._attackDownAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, true);
     }
 
     private void AttackDownAnimation() {
         this.ResetMoveAnimation();
-        this._animator.SetBool(this._attackDownAnimationFlag, true);
-        this._animator.SetBool(this._attackHorizontalAnimationFlag, false);
-        this._animator.SetBool(this._attackUpAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackDownAnimationFlag, true);
     }
 
     private void AttackUpAnimation() {
         this.ResetMoveAnimation();
-        this._animator.SetBool(this._attackUpAnimationFlag, true);
-        this._animator.SetBool(this._attackHorizontalAnimationFlag, false);
-        this._animator.SetBool(this._attackDownAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
+        this.ChangeAnimationFlag(this._attackUpAnimationFlag, true);
     }
 
     public void DisableAttack() {
-         this._animator.SetBool(this._attackHorizontalAnimationFlag, false);
-         this._animator.SetBool(this._attackUpAnimationFlag, false);
-         this._animator.SetBool(this._attackDownAnimationFlag, false);
-         this._isAttacking = false;
+         this.ChangeAnimationFlag(this._attackHorizontalAnimationFlag, false);
+         this.ChangeAnimationFlag(this._attackUpAnimationFlag, false);
+         this.ChangeAnimationFlag(this._attackDownAnimationFlag, false);
+         this.isAttacking = false;
     }
 
     // Getting animation name becuase be are generic, yay
     protected void Attack() {
-        this._isAttacking = true;
+        this.isAttacking = true;
 
-        float castDistance = 1f; // How far the box is cast
-        Vector2 boxSize = new Vector2(this._attackSize, this._attackSize);
-
-        Vector2 direction = transform.right; // default
-
-        switch(this._lastMoveDirection) {
+        switch(this.lastMoveDirection) {
             case Direction.Right:
                 this.AttackHorizontalAnimation();
-                direction = transform.right;
                 break;
             case Direction.Left:
                 this.AttackHorizontalAnimation();
-                direction = -transform.right;
                 break;
             case Direction.Up:
                 this.AttackUpAnimation();
-                direction = transform.up;
                 break;
             case Direction.Down:
                 this.AttackDownAnimation();
+                break;
+            default:
+                this.AttackHorizontalAnimation();
+                break;
+        }
+       
+    }
+
+    private void CheckIfAttackHit() {
+        Vector2 direction = transform.right; // default
+        switch(this.lastMoveDirection) {
+            case Direction.Right:
+                direction = transform.right;
+                break;
+            case Direction.Left:
+                direction = -transform.right;
+                break;
+            case Direction.Up:
+                direction = transform.up;
+                break;
+            case Direction.Down:
                 direction = -transform.up;
                 break;
             default:
-                Debug.Log("Default attack, right");
-                this.AttackHorizontalAnimation();
                 direction = transform.right;
                 break;
         }
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, castDistance, this._layerMask);
-         if (hit.collider != null) {
+
+        Vector2 boxSize = new Vector2(this.attackSize, this.attackSize);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxSize, 0f, direction, this.castDistance, this._layerMask);
+
+        if (hit.collider != null) {
             // Getting game object
             GameObject hitGameObject = hit.collider.gameObject;
 
             if(hitGameObject.CompareTag("Enemy") || hitGameObject.CompareTag("Player")) {
                 Entity entity = hitGameObject.GetComponent<Entity>();
                 entity.TakeDamage(this._damage);
+                this.DisableAttack();
             } 
-         }
+        }
     }
 
     public void TakeDamage(int dmg) {
         this._health -= dmg;
+        this.isHit = true;
 
         if(this._health <= 0) {
+            this.isDead = true;
             this.OnDeath();
-            Destroy(gameObject);
         } else {
-            this._animator.SetBool(this._hitAnimationFlag, true);
+            this.ChangeAnimationFlag(this._hitAnimationFlag, true);
         }
-        
     }
 
     public void DisableHitAnimation() {
-        this._animator.SetBool(this._hitAnimationFlag, false);
+        this.ChangeAnimationFlag(this._hitAnimationFlag, false);
+        this.isHit = false;
+    }
+
+    // Changing animcation flag if not default
+    protected void ChangeAnimationFlag(string flagName, bool flag) {
+        if(flagName != "default") {
+            this._animator.SetBool(flagName, flag);
+        }
+    }
+
+    public float CurrentHealthPercent() {
+        return (float)this._health / (float)this._maxHealth;
     }
 
     protected abstract void OnDeath();
