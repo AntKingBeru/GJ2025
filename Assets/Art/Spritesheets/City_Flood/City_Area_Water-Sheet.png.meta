@@ -1,0 +1,351 @@
+fileFormatVersion: 2
+guid: c89d7a953cf6a5f40980f85142c82251
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7787872618807208158
+    second: City_Area_Water-Sheet_0
+  - first:
+      213: -5204995263346069453
+    second: City_Area_Water-Sheet_1
+  - first:
+      213: -7435508725746578499
+    second: City_Area_Water-Sheet_2
+  - first:
+      213: 8145211045238572403
+    second: City_Area_Water-Sheet_3
+  - first:
+      213: 1359729290885006144
+    second: City_Area_Water-Sheet_4
+  - first:
+      213: 6595722868404695192
+    second: City_Area_Water-Sheet_5
+  - first:
+      213: 1044695359107779782
+    second: City_Area_Water-Sheet_6
+  - first:
+      213: 7932482166939307360
+    second: City_Area_Water-Sheet_7
+  - first:
+      213: 7832996067396372158
+    second: City_Area_Water-Sheet_8
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22751087d1bebe390800000000000000
+      internalID: -7787872618807208158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 330baae926424c7b0800000000000000
+      internalID: -5204995263346069453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbbce8d7534cfc890800000000000000
+      internalID: -7435508725746578499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375880c5a4a990170800000000000000
+      internalID: 8145211045238572403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04305edf59abed210800000000000000
+      internalID: 1359729290885006144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 890be20d007b88b50800000000000000
+      internalID: 6595722868404695192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cc4e12e4e08f7e00800000000000000
+      internalID: 1044695359107779782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 3136
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06dc983b086d51e60800000000000000
+      internalID: 7932482166939307360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: City_Area_Water-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 0
+        width: 448
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb6413c1c6464bc60800000000000000
+      internalID: 7832996067396372158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 742f32fdd2663364c88a4259c7a7f9a5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      City_Area_Water-Sheet_0: -7787872618807208158
+      City_Area_Water-Sheet_1: -5204995263346069453
+      City_Area_Water-Sheet_2: -7435508725746578499
+      City_Area_Water-Sheet_3: 8145211045238572403
+      City_Area_Water-Sheet_4: 1359729290885006144
+      City_Area_Water-Sheet_5: 6595722868404695192
+      City_Area_Water-Sheet_6: 1044695359107779782
+      City_Area_Water-Sheet_7: 7932482166939307360
+      City_Area_Water-Sheet_8: 7832996067396372158
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
