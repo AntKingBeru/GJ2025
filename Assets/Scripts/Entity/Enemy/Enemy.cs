@@ -5,6 +5,7 @@ public class Enemy : Entity
     [SerializeField] private GameObject _deadMePrefab;
     private Transform _target;
     private bool _wasInRadius;
+    [SerializeField] private float _attackDistanceTrigger = 1.5f;
     
     
     void Start()
@@ -62,9 +63,9 @@ public class Enemy : Entity
     }
 
     private void CheckAttack(){
-        float distance = Vector3.Distance(transform.position, this._target.position);
+        float distance = Vector2.Distance(transform.position, this._target.position);
         
-        if(distance <= this.castDistance) {
+        if(distance <= this._attackDistanceTrigger) {
             if(!this._wasInRadius) this.Attack();
             this._wasInRadius = true;
         } else this._wasInRadius = false;
