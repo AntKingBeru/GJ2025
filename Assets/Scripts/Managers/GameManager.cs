@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static bool pause = false;
     [SerializeField] private int _maxWaterBeforeFlood = 20000;
     [SerializeField] private int _maxWaterPerSpawn = 200;
+    [SerializeField] private Image _floodOverlay;
     private SpawnManager _spawnManager;
     private GameObject _youLoseScreen;
     private Player _player;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        GameManager.SetPause(false); // Reset pause
         StartCoroutine(CalculateFlood());
     }
 
@@ -79,8 +81,10 @@ public class GameManager : MonoBehaviour
             _spawnManager.gameObject.SetActive(false);
         }
         
-        // Checking current flood to activate sound
+        _floodOverlay.color = new Color(_floodOverlay.color.r, _floodOverlay.color.g, _floodOverlay.color.b, 
+            currentFloodPercent * 0.8f);
         
+        // Checking current flood to activate sound
         // Getting current water level
         WaterLevel waterLevel;
         if (_currentFlood >= 0f && _currentFlood < 0.1f)
