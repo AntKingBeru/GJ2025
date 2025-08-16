@@ -7,6 +7,7 @@ public class SpawnPoint : MonoBehaviour
     private bool _open = false;
 	private GameObject _enemy;
 	[SerializeField] private float _spawnRate;
+	[SerializeField] private float _spawnChance = 30f;
 
     public void SetEnemy(GameObject enemy)
     {
@@ -48,7 +49,9 @@ public class SpawnPoint : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(_spawnRate);
-            Instantiate(_enemy,gameObject.transform.position,gameObject.transform.rotation).SetActive(true);
+
+            if(Random.Range(0f, 100f) <= _spawnChance);
+                Instantiate(_enemy,gameObject.transform.position,gameObject.transform.rotation).SetActive(true);
         }
 
     }
