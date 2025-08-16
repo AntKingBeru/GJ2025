@@ -173,15 +173,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: _damage
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: _maxHealth
-      value: 1000000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: attackSize
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4744273440493889708, guid: 425fa47da8f4e67408a4bab294276feb, type: 3}
       propertyPath: castDistance

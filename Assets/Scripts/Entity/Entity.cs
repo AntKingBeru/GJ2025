@@ -195,26 +195,31 @@ public abstract class Entity : MonoBehaviour
 
     private void CheckIfAttackHit() {
         Vector2 direction = transform.right; // Assuming the box should move forward based on the object's right direction
+        Vector2 boxOffset = new Vector2(this.castDistance, 0);
         switch(this.lastMoveDirection) {
             case Direction.Right:
                 direction = transform.right;
+                boxOffset = new Vector2(this.castDistance, 0);
                 break;
             case Direction.Left:
                 direction = -transform.right;
+                boxOffset = new Vector2(-this.castDistance, 0);
                 break;
             case Direction.Up:
                 direction = transform.up;
+                boxOffset = new Vector2(0, this.castDistance);
                 break;
             case Direction.Down:
                 direction = -transform.up;
+                boxOffset = new Vector2(0, -this.castDistance);
                 break;
             default:
                 direction = transform.right;
+                boxOffset = new Vector2(this.castDistance, 0);
                 break;
         }
         
         Vector2 boxSize = new Vector2(this.attackSize, this.attackSize);
-        Vector2 boxOffset = new Vector2(this.castDistance, 0);
         float maxDistance = 1f; // Maximum distance to cast the box
         
         // Calculate the box's position and direction
