@@ -22,7 +22,6 @@ public class SpawnManager : MonoBehaviour
         _enemy = gameObject.GetComponentInChildren<Enemy>();
         _enemy.gameObject.SetActive(false);
         InitializeSpawnPoints();
-        StartCoroutine(StartSpawning());
     }
 
     void Awake()
@@ -41,7 +40,7 @@ public class SpawnManager : MonoBehaviour
 
         foreach (var spawnPoint in _spawnPoints)
         {
-            spawnPoint.gameObject.SetActive(false);
+            spawnPoint.Close();
         }
     }
 
