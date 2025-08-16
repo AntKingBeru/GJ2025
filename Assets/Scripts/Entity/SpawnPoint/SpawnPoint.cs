@@ -50,7 +50,7 @@ public class SpawnPoint : MonoBehaviour
         {
             yield return new WaitForSeconds(_spawnRate);
 
-            if(Random.Range(0f, 100f) <= _spawnChance);
+            if(Random.Range(0f, 100f) <= _spawnChance)
                 Instantiate(_enemy,gameObject.transform.position,gameObject.transform.rotation).SetActive(true);
         }
 

@@ -22,12 +22,12 @@ public class SceneFader : MonoBehaviour
         }
     }
     
-    public void LoadSceneWithFade(string sceneName)
+    public void LoadSceneWithFade(int sceneIndex)
     {
-        StartCoroutine(FadeOutAndLoadScene(sceneName));
+        StartCoroutine(FadeOutAndLoadScene(sceneIndex));
     }
 
-    private IEnumerator FadeOutAndLoadScene(string sceneName)
+    private IEnumerator FadeOutAndLoadScene(int sceneIndex)
     {
         fadeImage.gameObject.SetActive(true); // Ensure image is active
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0); // Start fully transparent
@@ -42,7 +42,7 @@ public class SceneFader : MonoBehaviour
         }
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1); // Ensure fully opaque
         
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneIndex);
         
         timer = 0f;
         while (timer < fadeDuration)
