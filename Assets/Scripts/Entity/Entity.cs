@@ -30,8 +30,6 @@ public abstract class Entity : MonoBehaviour
         get => (float)this._health / (float)this._maxHealth;
     }
 
-    public static bool pause = false;
-
     protected enum Direction 
     {
         Right,

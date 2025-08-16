@@ -9,9 +9,17 @@ public class SceneFader : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 1.0f;
 
-    void Start()
+    private void Awake()
     {
-       instance = this;
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // Ensures only one instance exists
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scenes
+        }
     }
     
     public void LoadSceneWithFade(string sceneName)
@@ -36,8 +44,6 @@ public class SceneFader : MonoBehaviour
         
         SceneManager.LoadScene(sceneName);
         
-        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1); // Start fully transparent
-
         timer = 0f;
         while (timer < fadeDuration)
         {
