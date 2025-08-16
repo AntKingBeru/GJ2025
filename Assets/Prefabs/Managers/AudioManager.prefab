@@ -87,3 +87,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
+  - name: EnemyBonk
+    clip: {fileID: 8300000, guid: 6b845e2635a35d44bbf746c4b68c1684, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}

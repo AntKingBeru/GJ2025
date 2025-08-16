@@ -34,6 +34,12 @@ public class Enemy : Entity
         }
     }
 
+    public override void TakeDamage(int dmg)
+    {
+        AudioManager.instance.PlaySound("EnemyBonk");
+        base.TakeDamage(dmg);
+    }
+
     private void MoveTowardsPlayer() {
         // Check if a target is assigned to prevent errors
         // Calculate the step to move towards the target
