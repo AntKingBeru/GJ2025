@@ -41,7 +41,7 @@ public class Player : Entity
 
         base.Move(horizontalInput, verticalInput);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !this.isAttacking) //to avoid multi attacks
         {
             base.Attack();
         }

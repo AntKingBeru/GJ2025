@@ -244,6 +244,8 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void TakeDamage(int dmg) {
         this._health -= dmg;
+        // Avoid multi hits
+        if(this.isHit) return;
         this.isHit = true;
         
         AudioManager.instance.PlaySound(this.hitSound);
